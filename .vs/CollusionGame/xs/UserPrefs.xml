@@ -1,0 +1,15 @@
+﻿<Properties StartupConfiguration="{8B17B8D6-862C-6741-3D84-0F9608F90089}|">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Game/Scripts/UserAccountUI.cs">
+    <Files>
+      <File FileName="Assets/Game/Scripts/UserAccountManager.cs" Line="51" Column="37" />
+      <File FileName="Assets/Game/Scripts/UserAccountUI.cs" Line="41" Column="6" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="272b9883-d359-4ab8-ac7a-06590253113d" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>
