@@ -53,19 +53,22 @@
     <UnityVersion>2020.3.26f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Assets/Demigiant/DOTweenPro/DOTweenProShortcuts.cs" />
+    <Compile Include="Assets/Demigiant/DOTweenPro/DOTweenTextMeshPro.cs" />
+    <Compile Include="Assets/ProfileEditing.cs" />
     <Compile Include="Assets/Game/Scripts/UserAccountManager.cs" />
-    <Compile Include="Assets/Game/Scripts/UserAccountUI.cs" />
     <Compile Include="Assets/Demigiant/DOTween/Modules/DOTweenModulePhysics2D.cs" />
     <Compile Include="Assets/Demigiant/DOTweenPro/DOTweenAnimation.cs" />
-    <Compile Include="Assets/Demigiant/DOTween/Modules/DOTweenModuleSprite.cs" />
-    <Compile Include="Assets/Demigiant/DOTween/Modules/DOTweenModuleAudio.cs" />
-    <Compile Include="Assets/Demigiant/DOTweenPro/DOTweenTextMeshPro.cs" />
     <Compile Include="Assets/Demigiant/DOTweenPro/DOTweenTk2d.cs" />
+    <Compile Include="Assets/Game/Scripts/MainMenuUIController.cs" />
+    <Compile Include="Assets/Demigiant/DOTween/Modules/DOTweenModulePhysics.cs" />
     <Compile Include="Assets/Demigiant/DOTween/Modules/DOTweenModuleUnityVersion.cs" />
-    <Compile Include="Assets/Demigiant/DOTweenPro/DOTweenProShortcuts.cs" />
+    <Compile Include="Assets/Demigiant/DOTween/Modules/DOTweenModuleSprite.cs" />
     <Compile Include="Assets/Demigiant/DOTween/Modules/DOTweenModuleUtils.cs" />
     <Compile Include="Assets/Demigiant/DOTween/Modules/DOTweenModuleUI.cs" />
-    <Compile Include="Assets/Demigiant/DOTween/Modules/DOTweenModulePhysics.cs" />
+    <Compile Include="Assets/Demigiant/DOTween/Modules/DOTweenModuleAudio.cs" />
+    <Compile Include="Assets/Game/Scripts/UserAccountUI.cs" />
+    <Compile Include="Assets/Game/Scripts/Constants.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets/Demigiant/readme_DOTweenPro.txt" />
@@ -265,6 +268,9 @@
     <Reference Include="UnityEngine.XRModule">
       <HintPath>/Applications/Unity/Hub/Editor/2020.3.26f1/PlaybackEngines/WebGLSupport/Managed/UnityEngine.XRModule.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.Recorder.Editor">
+      <HintPath>Library/ScriptAssemblies/Unity.Recorder.Editor.dll</HintPath>
+    </Reference>
     <Reference Include="PlayFabSDKEditor">
       <HintPath>Library/ScriptAssemblies/PlayFabSDKEditor.dll</HintPath>
     </Reference>
@@ -282,6 +288,9 @@
     </Reference>
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.2D.Sprite.Editor">
+      <HintPath>Library/ScriptAssemblies/Unity.2D.Sprite.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.UI">
       <HintPath>Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
@@ -651,6 +660,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="Unity.Recorder.Base.csproj">
+      <Project>{4702CD9A-6019-2A17-1E64-0EB53BCBEAEF}</Project>
+      <Name>Unity.Recorder.Base</Name>
+    </ProjectReference>
     <ProjectReference Include="Unity.Timeline.csproj">
       <Project>{43EAB166-F4A8-3606-7469-5A922D885757}</Project>
       <Name>Unity.Timeline</Name>
@@ -666,6 +679,10 @@
     <ProjectReference Include="UnityEngine.UI.csproj">
       <Project>{0A226FC8-CAED-5E46-0343-29B078EE5949}</Project>
       <Name>UnityEngine.UI</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.Recorder.csproj">
+      <Project>{9AFF57B6-02AD-FF25-086C-C9186889268F}</Project>
+      <Name>Unity.Recorder</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

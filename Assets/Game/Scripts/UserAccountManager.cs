@@ -1,14 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.EventSystems;
-
 using PlayFab;
 using PlayFab.ClientModels;
+using UnityEngine;
 using UnityEngine.Events;
 
 public class UserAccountManager : MonoBehaviour
 {
+    public string UserName;
+    public string PlayFabID;
+
     public static UserAccountManager Instance;
     public static UnityEvent<string> OnLoginSuccess = new UnityEvent<string>();
     public static UnityEvent<string> OnLoginFailed = new UnityEvent<string>();
@@ -19,13 +18,26 @@ public class UserAccountManager : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        if(Instance == null)
+        if (Instance == null)
         {
+            DontDestroyOnLoad(this);
             Instance = this;
+        }
+        else
+        {
+            Destroy(this.gameObject);
+        }
+
+        if (Constants.REMEMBER_ME == "True")
+        {
+            if (Constants.USERNAME != "" && Constants.PASSWORD != "")
+            {
+                Login(Constants.USERNAME, Constants.PASSWORD);
+            }
         }
     }
 
-     public void CreateUser(string userName, string email, string password)
+    public void CreateUser(string userName, string email, string password)
 
     {
         PlayFabClientAPI.RegisterPlayFabUser(
@@ -35,7 +47,7 @@ public class UserAccountManager : MonoBehaviour
                 Password = password,
                 Username = userName,
                 RequireBothUsernameAndEmail = true
-                
+
             },
             response =>
             {
@@ -45,10 +57,10 @@ public class UserAccountManager : MonoBehaviour
             error =>
             {
                 Debug.Log($"Error: ,{error.Error},{error.ErrorMessage},{error.ErrorDetails}");
-                OnRegistrationFailed.Invoke("Account Registeration Failed/n"+ error.Error);
+                OnRegistrationFailed.Invoke("Account Registeration Failed/n" + error.Error);
             }
-            
-            );   
+
+            );
 
     }
     public void Login(string userName, string password)
@@ -63,7 +75,17 @@ public class UserAccountManager : MonoBehaviour
             response =>
             {
                 Debug.Log($"Successfully account created: ,{userName}");
+                UserName = userName;
+                PlayFabID = response.PlayFabId;
+
+                if (Constants.REMEMBER_ME == "True")
+                {
+                    Constants.USERNAME = userName;
+                    Constants.PASSWORD = password;
+                    Debug.Log("Login Credentials Saved");
+                }
                 OnLoginSuccess.Invoke("Account Login Successful");
+
 
             },
             error =>

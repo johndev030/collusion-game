@@ -2,18 +2,35 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using UnityEngine.SceneManagement;
 
 public class UserAccountUI : MonoBehaviour
 {
     public Text msg;
     public GameObject loadingScreen;
+    public GameObject loadingBarParent;
+    public Image loadingBar;
 
+
+    private void Awake()
+    {
+        print("Constants.REMEMBER_ME: " + Constants.REMEMBER_ME);
+        if (Constants.REMEMBER_ME == "True")
+        {
+            toggle.isOn = true;
+        }
+        else
+        {
+            toggle.isOn = false;
+        }
+    }
     string email_register, password_register, userName_register;
 
     private void OnEnable()
     {
         UserAccountManager.OnLoginSuccess.AddListener(DisplayMessage);
+        UserAccountManager.OnLoginSuccess.AddListener(GoToMainMenu);
+
         UserAccountManager.OnLoginFailed.AddListener(DisplayMessage);
         UserAccountManager.OnRegistrationSuccessfull.AddListener(DisplayMessage);
         UserAccountManager.OnRegistrationFailed.AddListener(DisplayMessage);
@@ -31,6 +48,30 @@ public class UserAccountUI : MonoBehaviour
         loadingScreen.SetActive(false);
         msg.text = message;
         msg.gameObject.SetActive(true);
+    }
+
+    IEnumerator LoadMainMenu()
+    {
+        yield return new WaitForSeconds(0.8f);
+        loadingBarParent.SetActive(true);
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("Main");
+
+        loadingBar.fillAmount = asyncLoad.progress;
+        // Wait until the asynchronous scene fully loads
+        while (!asyncLoad.isDone)
+        {
+            yield return null;
+        }
+    }
+    public Toggle toggle;
+    public void RememberMe()
+    {
+        Constants.REMEMBER_ME = toggle.isOn.ToString();
+        print("toggle " + toggle.isOn.ToString());
+    }
+    void GoToMainMenu(string message)
+    {
+        StartCoroutine(LoadMainMenu());
     }
     public void DisableDisplayMessage()
     {

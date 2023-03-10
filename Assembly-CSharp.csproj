@@ -53,19 +53,22 @@
     <UnityVersion>2020.3.26f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Assets/Demigiant/DOTweenPro/DOTweenProShortcuts.cs" />
+    <Compile Include="Assets/Demigiant/DOTweenPro/DOTweenTextMeshPro.cs" />
+    <Compile Include="Assets/ProfileEditing.cs" />
     <Compile Include="Assets/Game/Scripts/UserAccountManager.cs" />
-    <Compile Include="Assets/Game/Scripts/UserAccountUI.cs" />
     <Compile Include="Assets/Demigiant/DOTween/Modules/DOTweenModulePhysics2D.cs" />
     <Compile Include="Assets/Demigiant/DOTweenPro/DOTweenAnimation.cs" />
-    <Compile Include="Assets/Demigiant/DOTween/Modules/DOTweenModuleSprite.cs" />
-    <Compile Include="Assets/Demigiant/DOTween/Modules/DOTweenModuleAudio.cs" />
-    <Compile Include="Assets/Demigiant/DOTweenPro/DOTweenTextMeshPro.cs" />
     <Compile Include="Assets/Demigiant/DOTweenPro/DOTweenTk2d.cs" />
+    <Compile Include="Assets/Game/Scripts/MainMenuUIController.cs" />
+    <Compile Include="Assets/Demigiant/DOTween/Modules/DOTweenModulePhysics.cs" />
     <Compile Include="Assets/Demigiant/DOTween/Modules/DOTweenModuleUnityVersion.cs" />
-    <Compile Include="Assets/Demigiant/DOTweenPro/DOTweenProShortcuts.cs" />
+    <Compile Include="Assets/Demigiant/DOTween/Modules/DOTweenModuleSprite.cs" />
     <Compile Include="Assets/Demigiant/DOTween/Modules/DOTweenModuleUtils.cs" />
     <Compile Include="Assets/Demigiant/DOTween/Modules/DOTweenModuleUI.cs" />
-    <Compile Include="Assets/Demigiant/DOTween/Modules/DOTweenModulePhysics.cs" />
+    <Compile Include="Assets/Demigiant/DOTween/Modules/DOTweenModuleAudio.cs" />
+    <Compile Include="Assets/Game/Scripts/UserAccountUI.cs" />
+    <Compile Include="Assets/Game/Scripts/Constants.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets/Demigiant/readme_DOTweenPro.txt" />
@@ -292,14 +295,14 @@
     <Reference Include="UnityEditor.UnityConnectModule">
       <HintPath>/Applications/Unity/Hub/Editor/2020.3.26f1/Unity.app/Contents/Managed/UnityEngine/UnityEditor.UnityConnectModule.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>Library/PackageCache/com.unity.nuget.newtonsoft-json@2.0.0/Runtime/Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="DemiLib">
       <HintPath>Assets/Demigiant/DemiLib/Core/DemiLib.dll</HintPath>
     </Reference>
     <Reference Include="DOTween">
       <HintPath>Assets/Demigiant/DOTween/DOTween.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>Library/PackageCache/com.unity.nuget.newtonsoft-json@2.0.0/Runtime/Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="DOTweenPro">
       <HintPath>Assets/Demigiant/DOTweenPro/DOTweenPro.dll</HintPath>
@@ -657,6 +660,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="Unity.Recorder.Editor.csproj">
+      <Project>{2E90059A-365E-50D5-B252-96F25D924AFF}</Project>
+      <Name>Unity.Recorder.Editor</Name>
+    </ProjectReference>
     <ProjectReference Include="PlayFabSDKEditor.csproj">
       <Project>{B29D62B6-4CA4-CCD2-B3C2-40C25D6AAE17}</Project>
       <Name>PlayFabSDKEditor</Name>
@@ -664,6 +671,10 @@
     <ProjectReference Include="Unity.VSCode.Editor.csproj">
       <Project>{AA7196DD-5A22-64DF-788E-F8A8593342D9}</Project>
       <Name>Unity.VSCode.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.Recorder.Base.csproj">
+      <Project>{4702CD9A-6019-2A17-1E64-0EB53BCBEAEF}</Project>
+      <Name>Unity.Recorder.Base</Name>
     </ProjectReference>
     <ProjectReference Include="PlayFabEditorExtensions.csproj">
       <Project>{C1A44912-BE04-07E3-BBC5-DA68D42C2F77}</Project>
@@ -693,6 +704,10 @@
       <Project>{1C4AA409-E06B-B68B-1A12-654E12F4ECFB}</Project>
       <Name>Unity.TextMeshPro</Name>
     </ProjectReference>
+    <ProjectReference Include="Unity.2D.Sprite.Editor.csproj">
+      <Project>{AFFD01C1-F05F-BC69-5F37-899E0C7D416E}</Project>
+      <Name>Unity.2D.Sprite.Editor</Name>
+    </ProjectReference>
     <ProjectReference Include="UnityEditor.UI.csproj">
       <Project>{01007D10-1CF9-1124-3B42-6DB1E771003B}</Project>
       <Name>UnityEditor.UI</Name>
@@ -708,6 +723,10 @@
     <ProjectReference Include="UnityEngine.UI.csproj">
       <Project>{0A226FC8-CAED-5E46-0343-29B078EE5949}</Project>
       <Name>UnityEngine.UI</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.Recorder.csproj">
+      <Project>{9AFF57B6-02AD-FF25-086C-C9186889268F}</Project>
+      <Name>Unity.Recorder</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
