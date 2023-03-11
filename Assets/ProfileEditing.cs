@@ -11,7 +11,7 @@ public class ProfileEditing : MonoBehaviour
 {
     public Button[] profileImageButton;
     public Sprite[] profileImageSprites;
-
+    public InputField inputFieldName;
     private int profilePhotoIndex;
 
 
@@ -50,6 +50,7 @@ public class ProfileEditing : MonoBehaviour
             profileImageButton[i].image.overrideSprite = profileImageSprites[i];
         }
         GetUserData();
+        GetPlayerProfile(UserAccountManager.Instance.PlayFabID);
     }
     public void SetUserData()
     {
@@ -61,8 +62,14 @@ public class ProfileEditing : MonoBehaviour
             { "ProfilePhoto", profilePhotoIndex.ToString() },
         }
         },
-        result => { Debug.Log("Successfully updated user data");
-                MainMenuUIController.Instance.profilePhoto.overrideSprite = profileImageSprites[profilePhotoIndex];
+        result =>
+        {
+            Debug.Log("Successfully updated user data");
+
+            for (int i = 0; i < MainMenuUIController.Instance.profilePhoto.Length; i++)
+            {
+                MainMenuUIController.Instance.profilePhoto[i].overrideSprite = profileImageSprites[profilePhotoIndex];
+            }
         },
         error =>
         {
@@ -78,13 +85,16 @@ public class ProfileEditing : MonoBehaviour
             Keys = null
         }, result =>
         {
-            Debug.Log("Got user data:");
+            //Debug.Log("Got user data:");
             if (result.Data == null || !result.Data.ContainsKey("ProfilePhoto")) Debug.Log("No such key is present");
             else
             {
                 profilePhotoIndex = int.Parse(result.Data["ProfilePhoto"].Value);
-                MainMenuUIController.Instance.profilePhoto.overrideSprite = profileImageSprites[int.Parse(result.Data["ProfilePhoto"].Value)];
-                Debug.Log("profile: " + result.Data["ProfilePhoto"].Value);
+                for (int i = 0; i < MainMenuUIController.Instance.profilePhoto.Length; i++)
+                {
+                    MainMenuUIController.Instance.profilePhoto[i].overrideSprite = profileImageSprites[int.Parse(result.Data["ProfilePhoto"].Value)];
+                }
+                //Debug.Log("profile: " + result.Data["ProfilePhoto"].Value);
             }
         }, (error) =>
         {
@@ -92,8 +102,34 @@ public class ProfileEditing : MonoBehaviour
             Debug.Log(error.GenerateErrorReport());
         });
     }
-    void UploadProfilePhoto(int index)
+    public void UpdateDisplayName()
     {
-        //PlayFabClientAPI.up
+        PlayFabClientAPI.UpdateUserTitleDisplayName(new UpdateUserTitleDisplayNameRequest
+        {
+            DisplayName = inputFieldName.text
+        }, result =>
+        {
+            Debug.Log("The player's display name is now: " + result.DisplayName);
+            MainMenuUIController.Instance.nameText.text = result.DisplayName;
+
+        }, error => Debug.LogError(error.GenerateErrorReport())); ;
+    }
+    void GetPlayerProfile(string playFabId)
+    {
+        PlayFabClientAPI.GetPlayerProfile(new GetPlayerProfileRequest()
+        {
+            PlayFabId = playFabId,
+            ProfileConstraints = new PlayerProfileViewConstraints()
+            {
+                ShowDisplayName = true
+            }
+        },
+        result =>
+        {
+            Debug.Log("The player's DisplayName profile data is: " + result.PlayerProfile.DisplayName);
+            MainMenuUIController.Instance.nameText.text = result.PlayerProfile.DisplayName;
+            inputFieldName.text = result.PlayerProfile.DisplayName;
+        },
+        error => Debug.LogError(error.GenerateErrorReport()));
     }
 }

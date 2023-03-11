@@ -14,7 +14,6 @@ public class UserAccountUI : MonoBehaviour
 
     private void Awake()
     {
-        print("Constants.REMEMBER_ME: " + Constants.REMEMBER_ME);
         if (Constants.REMEMBER_ME == "True")
         {
             toggle.isOn = true;
@@ -56,10 +55,24 @@ public class UserAccountUI : MonoBehaviour
         loadingBarParent.SetActive(true);
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("Main");
 
-        loadingBar.fillAmount = asyncLoad.progress;
+        asyncLoad.allowSceneActivation = false;
         // Wait until the asynchronous scene fully loads
         while (!asyncLoad.isDone)
         {
+            loadingBar.fillAmount =  asyncLoad.progress;
+            print("asyncLoad.progress" + asyncLoad.progress);
+
+            // Check if the load has finished
+            if (asyncLoad.progress >= 0.9f)
+            {
+                //Change the Text to show the Scene is ready
+                //m_Text.text = "Press the space bar to continue";
+                //Wait to you press the space key to activate the Scene
+                //if (Input.GetKeyDown(KeyCode.Space))
+                //Activate the Scene
+                asyncLoad.allowSceneActivation = true;
+            }
+
             yield return null;
         }
     }

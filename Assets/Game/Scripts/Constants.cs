@@ -40,4 +40,16 @@ public class Constants
             Debug.Log("remember_me" + remember_me);
         }
     }
+
+    public static string PROFILE_SETUP
+    {
+        get
+        {
+            return PlayerPrefs.GetString("PROFILE_SETUP", "False");
+        }
+        set
+        {
+            PlayerPrefs.SetString("PROFILE_SETUP", value);
+        }
+    }
 }

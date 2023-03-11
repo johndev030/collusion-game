@@ -251,9 +251,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 257
-        y: 489
-        width: 97
-        height: 93
+        y: 485
+        width: 98
+        height: 98
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -271,10 +271,10 @@ TextureImporter:
       name: profilePhotos_3
       rect:
         serializedVersion: 2
-        x: 306
+        x: 373
         y: 486
-        width: 31
-        height: 13
+        width: 96
+        height: 95
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -292,10 +292,10 @@ TextureImporter:
       name: profilePhotos_4
       rect:
         serializedVersion: 2
-        x: 373
-        y: 486
+        x: 487
+        y: 485
         width: 96
-        height: 95
+        height: 97
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -313,10 +313,10 @@ TextureImporter:
       name: profilePhotos_5
       rect:
         serializedVersion: 2
-        x: 487
-        y: 485
-        width: 96
-        height: 97
+        x: 28
+        y: 371
+        width: 97
+        height: 96
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -334,7 +334,7 @@ TextureImporter:
       name: profilePhotos_6
       rect:
         serializedVersion: 2
-        x: 28
+        x: 143
         y: 371
         width: 97
         height: 96
@@ -355,7 +355,7 @@ TextureImporter:
       name: profilePhotos_7
       rect:
         serializedVersion: 2
-        x: 143
+        x: 258
         y: 371
         width: 96
         height: 96
@@ -376,7 +376,7 @@ TextureImporter:
       name: profilePhotos_8
       rect:
         serializedVersion: 2
-        x: 258
+        x: 373
         y: 371
         width: 96
         height: 96
@@ -397,10 +397,10 @@ TextureImporter:
       name: profilePhotos_9
       rect:
         serializedVersion: 2
-        x: 373
-        y: 371
+        x: 487
+        y: 370
         width: 96
-        height: 96
+        height: 97
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -418,10 +418,10 @@ TextureImporter:
       name: profilePhotos_10
       rect:
         serializedVersion: 2
-        x: 487
-        y: 371
-        width: 96
-        height: 96
+        x: 27
+        y: 255
+        width: 98
+        height: 98
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -439,10 +439,10 @@ TextureImporter:
       name: profilePhotos_11
       rect:
         serializedVersion: 2
-        x: 28
+        x: 143
         y: 256
-        width: 97
-        height: 96
+        width: 96
+        height: 98
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -460,10 +460,10 @@ TextureImporter:
       name: profilePhotos_12
       rect:
         serializedVersion: 2
-        x: 143
+        x: 258
         y: 256
         width: 96
-        height: 98
+        height: 99
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -481,10 +481,10 @@ TextureImporter:
       name: profilePhotos_13
       rect:
         serializedVersion: 2
-        x: 258
+        x: 373
         y: 256
         width: 96
-        height: 99
+        height: 96
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -502,10 +502,10 @@ TextureImporter:
       name: profilePhotos_14
       rect:
         serializedVersion: 2
-        x: 373
-        y: 256
-        width: 96
-        height: 96
+        x: 488
+        y: 253
+        width: 95
+        height: 99
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -523,10 +523,10 @@ TextureImporter:
       name: profilePhotos_15
       rect:
         serializedVersion: 2
-        x: 488
-        y: 253
+        x: 29
+        y: 141
         width: 95
-        height: 101
+        height: 96
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -544,9 +544,9 @@ TextureImporter:
       name: profilePhotos_16
       rect:
         serializedVersion: 2
-        x: 29
+        x: 143
         y: 141
-        width: 95
+        width: 96
         height: 96
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -565,9 +565,9 @@ TextureImporter:
       name: profilePhotos_17
       rect:
         serializedVersion: 2
-        x: 143
+        x: 257
         y: 141
-        width: 96
+        width: 97
         height: 96
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -586,10 +586,10 @@ TextureImporter:
       name: profilePhotos_18
       rect:
         serializedVersion: 2
-        x: 257
+        x: 373
         y: 141
-        width: 97
-        height: 96
+        width: 98
+        height: 97
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -607,10 +607,10 @@ TextureImporter:
       name: profilePhotos_19
       rect:
         serializedVersion: 2
-        x: 373
+        x: 487
         y: 141
-        width: 98
-        height: 97
+        width: 96
+        height: 96
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -628,9 +628,9 @@ TextureImporter:
       name: profilePhotos_20
       rect:
         serializedVersion: 2
-        x: 487
-        y: 141
-        width: 96
+        x: 28
+        y: 27
+        width: 97
         height: 96
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -649,9 +649,9 @@ TextureImporter:
       name: profilePhotos_21
       rect:
         serializedVersion: 2
-        x: 28
+        x: 143
         y: 27
-        width: 97
+        width: 96
         height: 96
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -670,10 +670,10 @@ TextureImporter:
       name: profilePhotos_22
       rect:
         serializedVersion: 2
-        x: 143
-        y: 27
+        x: 258
+        y: 26
         width: 96
-        height: 96
+        height: 97
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -691,10 +691,10 @@ TextureImporter:
       name: profilePhotos_23
       rect:
         serializedVersion: 2
-        x: 258
-        y: 26
+        x: 373
+        y: 27
         width: 96
-        height: 97
+        height: 95
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -712,27 +712,6 @@ TextureImporter:
       name: profilePhotos_24
       rect:
         serializedVersion: 2
-        x: 373
-        y: 27
-        width: 96
-        height: 95
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 181a908f611728be0800000000000000
-      internalID: -1476493384359501439
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: profilePhotos_25
-      rect:
-        serializedVersion: 2
         x: 487
         y: 27
         width: 96
@@ -744,8 +723,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 400bb1faee4ff06c0800000000000000
-      internalID: -4174849023571939324
+      spriteID: 181a908f611728be0800000000000000
+      internalID: -1476493384359501439
       vertices: []
       indices: 
       edges: []

@@ -32,6 +32,7 @@ public class UserAccountManager : MonoBehaviour
         {
             if (Constants.USERNAME != "" && Constants.PASSWORD != "")
             {
+                FindObjectOfType<UserAccountUI>().loadingScreen.SetActive(true);
                 Login(Constants.USERNAME, Constants.PASSWORD);
             }
         }
@@ -74,7 +75,7 @@ public class UserAccountManager : MonoBehaviour
             },
             response =>
             {
-                Debug.Log($"Successfully account created: ,{userName}");
+                //Debug.Log($"Successfully account created: ,{userName}");
                 UserName = userName;
                 PlayFabID = response.PlayFabId;
 
@@ -82,7 +83,7 @@ public class UserAccountManager : MonoBehaviour
                 {
                     Constants.USERNAME = userName;
                     Constants.PASSWORD = password;
-                    Debug.Log("Login Credentials Saved");
+                    //Debug.Log("Login Credentials Saved");
                 }
                 OnLoginSuccess.Invoke("Account Login Successful");
 

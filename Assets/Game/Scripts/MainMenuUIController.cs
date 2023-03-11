@@ -10,9 +10,10 @@ public class MainMenuUIController : MonoBehaviour
 
     [Header("Profile")]
     [Space(5)]
-    public Text userName;
-    public Image profilePhoto;
-    public Sprite[] profilePhotos;
+    public Text userNameText;
+    public Text nameText;
+    public Image[] profilePhoto;
+    public GameObject profileEditingPanel;
     [Space(10)]
     [Header("PlayerDashboard")]
     public Text timeElapsed;
@@ -23,6 +24,16 @@ public class MainMenuUIController : MonoBehaviour
         {
             Instance = this;
         }
+
+        if(Constants.PROFILE_SETUP == "False")
+        {
+            profileEditingPanel.SetActive(true);
+            Constants.PROFILE_SETUP = "True";
+        }
+        else
+        {
+            profileEditingPanel.SetActive(false);
+        }
     }
 
     // Start is called before the first frame update
@@ -31,33 +42,12 @@ public class MainMenuUIController : MonoBehaviour
         SetupProfile();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-
     void SetupProfile()
     {
-        userName.text = UserAccountManager.Instance.UserName;
-        PlayFabClientAPI.GetPlayerProfile(
-            new GetPlayerProfileRequest
-            {
-                
-            },response =>
-            {
-                Debug.Log($"Successfully account created: ,{userName}");
-
-            },
-            error =>
-            {
-                Debug.Log($"Error: ,{error.Error},{error.ErrorMessage},{error.ErrorDetails}");
-            }
-
-        );
+        userNameText.text = "@"+UserAccountManager.Instance.UserName;
     }
 
+    /*
     void UpdateDisplayName(string displayName)
     {
         PlayFabClientAPI.UpdateUserTitleDisplayName(new UpdateUserTitleDisplayNameRequest
@@ -79,5 +69,5 @@ public class MainMenuUIController : MonoBehaviour
         },
         result => Debug.Log("The player's DisplayName profile data is: " + result.PlayerProfile.DisplayName),
         error => Debug.LogError(error.GenerateErrorReport()));
-    }
+    }*/
 }
