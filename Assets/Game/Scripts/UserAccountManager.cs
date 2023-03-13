@@ -7,6 +7,8 @@ public class UserAccountManager : MonoBehaviour
 {
     public string UserName;
     public string PlayFabID;
+    public int ProfilePhotoIndex;
+
 
     public static UserAccountManager Instance;
     public static UnityEvent<string> OnLoginSuccess = new UnityEvent<string>();
@@ -18,6 +20,8 @@ public class UserAccountManager : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
+        //PlayerPrefs.DeleteAll();
+
         if (Instance == null)
         {
             DontDestroyOnLoad(this);
@@ -53,7 +57,9 @@ public class UserAccountManager : MonoBehaviour
             response =>
             {
                 Debug.Log($"Successfully account created: ,{userName},{email}");
-                OnRegistrationSuccessfull.Invoke("Account Registered Successfully");
+                OnRegistrationSuccessfull.Invoke("Account Registered Successfully, Logging In");
+                FindObjectOfType<UserAccountUI>().loadingScreen.SetActive(true);
+                Login(userName, password);
             },
             error =>
             {

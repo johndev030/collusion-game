@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using PlayFab;
+using PlayFab.ClientModels;
 
 public class UserAccountUI : MonoBehaviour
 {
@@ -53,6 +55,8 @@ public class UserAccountUI : MonoBehaviour
     {
         yield return new WaitForSeconds(0.8f);
         loadingBarParent.SetActive(true);
+        loadingScreen.SetActive(true);
+
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("Main");
 
         asyncLoad.allowSceneActivation = false;
@@ -60,10 +64,10 @@ public class UserAccountUI : MonoBehaviour
         while (!asyncLoad.isDone)
         {
             loadingBar.fillAmount =  asyncLoad.progress;
-            print("asyncLoad.progress" + asyncLoad.progress);
+            //print("asyncLoad.progress" + asyncLoad.progress);
 
             // Check if the load has finished
-            if (asyncLoad.progress >= 0.9f)
+            if (asyncLoad.progress >= 0.9f && setProfilePhoto)
             {
                 //Change the Text to show the Scene is ready
                 //m_Text.text = "Press the space bar to continue";
@@ -84,6 +88,7 @@ public class UserAccountUI : MonoBehaviour
     }
     void GoToMainMenu(string message)
     {
+        GetUserData();
         StartCoroutine(LoadMainMenu());
     }
     public void DisableDisplayMessage()
@@ -129,4 +134,58 @@ public class UserAccountUI : MonoBehaviour
         loadingScreen.SetActive(true);
         UserAccountManager.Instance.Login(userName_login, password_login);
     }
+
+
+    #region Default Values
+    bool setProfilePhoto = false;
+    public void SetProfilePhoto()
+    {
+        PlayFabClientAPI.UpdateUserData(new UpdateUserDataRequest()
+        {
+            Data = new Dictionary<string, string>() {
+
+
+            { "ProfilePhoto", "0" },
+        }
+        },
+        result =>
+        {
+            Debug.Log("Successfully updated user data");
+            setProfilePhoto = true;
+        },
+        error =>
+        {
+            Debug.Log("Profile photo not updated");
+            Debug.Log(error.GenerateErrorReport());
+            SetProfilePhoto();
+        });
+    }
+
+    public void GetUserData()
+    {
+        PlayFabClientAPI.GetUserData(new GetUserDataRequest()
+        {
+            PlayFabId = UserAccountManager.Instance.PlayFabID, //THIS LİNE ISN'T WORKİNG//
+            Keys = null
+        }, result =>
+        {
+            //Debug.Log("Got user data:");
+            if (result.Data == null || !result.Data.ContainsKey("ProfilePhoto"))
+            {
+                SetProfilePhoto();
+            }
+            else
+            {
+                UserAccountManager.Instance.ProfilePhotoIndex = int.Parse(result.Data["ProfilePhoto"].Value);
+                //Debug.Log("profile: " + result.Data["ProfilePhoto"].Value);
+                setProfilePhoto = true;
+
+            }
+        }, (error) =>
+        {
+            Debug.Log("Got error retrieving user data:");
+            Debug.Log(error.GenerateErrorReport());
+        });
+    }
+    #endregion
 }

@@ -52,4 +52,15 @@ public class Constants
             PlayerPrefs.SetString("PROFILE_SETUP", value);
         }
     }
+    public static string QUESTIONIER_ASKED
+    {
+        get
+        {
+            return PlayerPrefs.GetString("QUESTIONIER_ASKED", "False");
+        }
+        set
+        {
+            PlayerPrefs.SetString("QUESTIONIER_ASKED", value);
+        }
+    }
 }

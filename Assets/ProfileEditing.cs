@@ -9,10 +9,17 @@ using PlayFab.ClientModels;
 
 public class ProfileEditing : MonoBehaviour
 {
+    public GameObject ProfileEditingPanel;
     public Button[] profileImageButton;
     public Sprite[] profileImageSprites;
     public InputField inputFieldName;
     private int profilePhotoIndex;
+
+    [Space(10)]
+    [Header("Questionier Data")]
+    public GameObject QuestionierPanel;
+    public Dropdown inputFieldTeamSize, inputFieldTeamSystem, inputFieldResponsiveness, inputFieldTeamMemberType;
+    public Button saveQuestionerButton;
 
 
     // Start is called before the first frame update
@@ -26,19 +33,18 @@ public class ProfileEditing : MonoBehaviour
                 SelectPhoto(tempIndex);
             });
         }
+        Setup();
     }
 
     private void SelectPhoto(int index)
     {
         profilePhotoIndex = index;
-        //profileImageButton[profilePhotoIndex].gameObject.
-        Debug.Log("profilePhotoIndex : " + profilePhotoIndex);
     }
 
-    private void OnEnable()
-    {
-        Setup();
-    }
+    //private void Start()
+    //{
+    //    Setup();
+    //}
     public void SelectProfilePhoto(int index)
     {
         profilePhotoIndex = index;
@@ -49,10 +55,14 @@ public class ProfileEditing : MonoBehaviour
         {
             profileImageButton[i].image.overrideSprite = profileImageSprites[i];
         }
-        GetUserData();
+        for (int i = 0; i < MainMenuUIController.Instance.profilePhoto.Length; i++)
+        {
+            MainMenuUIController.Instance.profilePhoto[i].overrideSprite = profileImageSprites[UserAccountManager.Instance.ProfilePhotoIndex];
+        }
+        //GetUserData();
         GetPlayerProfile(UserAccountManager.Instance.PlayFabID);
     }
-    public void SetUserData()
+    public void SetProfilePhoto()
     {
         PlayFabClientAPI.UpdateUserData(new UpdateUserDataRequest()
         {
@@ -112,6 +122,12 @@ public class ProfileEditing : MonoBehaviour
             Debug.Log("The player's display name is now: " + result.DisplayName);
             MainMenuUIController.Instance.nameText.text = result.DisplayName;
 
+            if (Constants.QUESTIONIER_ASKED == "False")
+            {
+                ProfileEditingPanel.SetActive(false);
+                QuestionierPanel.SetActive(true);
+            }
+
         }, error => Debug.LogError(error.GenerateErrorReport())); ;
     }
     void GetPlayerProfile(string playFabId)
@@ -131,5 +147,33 @@ public class ProfileEditing : MonoBehaviour
             inputFieldName.text = result.PlayerProfile.DisplayName;
         },
         error => Debug.LogError(error.GenerateErrorReport()));
+    }
+
+    public void SaveQuestionier()
+    {
+        saveQuestionerButton.interactable = false;
+        PlayFabClientAPI.UpdateUserData(new UpdateUserDataRequest()
+        {
+            Data = new Dictionary<string, string>() {
+            { "TeamSize", inputFieldTeamSize.options[inputFieldTeamSize.value].text.ToString() },
+            { "TeamSystem", inputFieldTeamSystem.options[inputFieldTeamSystem.value].text.ToString() },
+            { "Responsiveness", inputFieldResponsiveness.options[inputFieldResponsiveness.value].text.ToString() },
+            { "MemberType", inputFieldTeamMemberType.options[inputFieldTeamMemberType.value].text.ToString() }
+            }
+
+        },
+        result =>
+        {
+            Debug.Log("Successfully updated Questionier data");
+            saveQuestionerButton.interactable = true;
+            Constants.QUESTIONIER_ASKED = "True";
+        },
+        error =>
+        {
+            Debug.Log("Questionier not updated");
+            Debug.Log(error.GenerateErrorReport());
+            saveQuestionerButton.interactable = true;
+
+        });
     }
 }
