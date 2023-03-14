@@ -590,7 +590,7 @@ PlayerSettings:
   webGLThreadsSupport: 0
   webGLDecompressionFallback: 0
   scriptingDefineSymbols:
-    13: ENABLE_PLAYFABADMIN_API
+    13: ENABLE_PLAYFABADMIN_API;ENABLE_PLAYFABSERVER_API
   additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend: {}

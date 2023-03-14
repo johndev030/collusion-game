@@ -1,1 +1,1 @@
-{"m_DefineSymbols":{"m_Value":[{"first":13,"second":"ENABLE_PLAYFABADMIN_API"}],"m_Initialized":true},"m_AllowUnsafeCode":{"m_Value":false,"m_Initialized":false},"m_ScriptDebugInfoEnabled":{"m_Value":true,"m_Initialized":true}}
+{"m_DefineSymbols":{"m_Value":[{"first":13,"second":"ENABLE_PLAYFABADMIN_API;ENABLE_PLAYFABSERVER_API"}],"m_Initialized":true},"m_AllowUnsafeCode":{"m_Value":false,"m_Initialized":false},"m_ScriptDebugInfoEnabled":{"m_Value":true,"m_Initialized":true}}

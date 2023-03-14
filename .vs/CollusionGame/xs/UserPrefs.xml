@@ -1,12 +1,14 @@
 ﻿<Properties StartupConfiguration="{8B17B8D6-862C-6741-3D84-0F9608F90089}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/PlayFabSDK/Client/PlayFabClientModels.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Game/Scripts/UserAccountManager.cs">
     <Files>
-      <File FileName="Assets/Game/Scripts/UserAccountManager.cs" Line="88" Column="31" />
-      <File FileName="Assets/Game/Scripts/UserAccountUI.cs" Line="65" Column="46" />
-      <File FileName="Assets/Game/Scripts/MainMenuUIController.cs" Line="74" Column="1" />
-      <File FileName="Assets/ProfileEditing.cs" Line="140" Column="55" />
-      <File FileName="Assets/Game/Scripts/Constants.cs" Line="43" Column="1" />
-      <File FileName="Assets/PlayFabSDK/Client/PlayFabClientModels.cs" Line="6953" Column="18" />
+      <File FileName="Assets/Game/Scripts/UserAccountManager.cs" Line="202" Column="15" />
+      <File FileName="Assets/Game/Scripts/UserAccountUI.cs" Line="205" Column="43" />
+      <File FileName="Assets/Game/Scripts/MainMenuUIController.cs" />
+      <File FileName="Assets/ProfileEditing.cs" />
+      <File FileName="Assets/Game/Scripts/Constants.cs" />
+      <File FileName="Assets/PlayFabSDK/Client/PlayFabClientModels.cs" Line="3120" Column="46" />
+      <File FileName="Assets/PlayFabSDK/Shared/Models/SharedModels.cs" Line="23" Column="18" />
+      <File FileName="Assets/Game/Scripts/Tokens.cs" Line="20" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />

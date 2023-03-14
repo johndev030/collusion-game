@@ -63,12 +63,13 @@ public class UserAccountUI : MonoBehaviour
         // Wait until the asynchronous scene fully loads
         while (!asyncLoad.isDone)
         {
-            loadingBar.fillAmount =  asyncLoad.progress;
+            loadingBar.fillAmount = asyncLoad.progress;
             //print("asyncLoad.progress" + asyncLoad.progress);
 
             // Check if the load has finished
-            if (asyncLoad.progress >= 0.9f && setProfilePhoto)
+            if (asyncLoad.progress >= 0.9f && setProfilePhoto && setupMoney)
             {
+                loadingBar.fillAmount = 1;
                 //Change the Text to show the Scene is ready
                 //m_Text.text = "Press the space bar to continue";
                 //Wait to you press the space key to activate the Scene
@@ -89,6 +90,7 @@ public class UserAccountUI : MonoBehaviour
     void GoToMainMenu(string message)
     {
         GetUserData();
+        GetVirtualCurrency();
         StartCoroutine(LoadMainMenu());
     }
     public void DisableDisplayMessage()
@@ -143,8 +145,6 @@ public class UserAccountUI : MonoBehaviour
         PlayFabClientAPI.UpdateUserData(new UpdateUserDataRequest()
         {
             Data = new Dictionary<string, string>() {
-
-
             { "ProfilePhoto", "0" },
         }
         },
@@ -169,7 +169,6 @@ public class UserAccountUI : MonoBehaviour
             Keys = null
         }, result =>
         {
-            //Debug.Log("Got user data:");
             if (result.Data == null || !result.Data.ContainsKey("ProfilePhoto"))
             {
                 SetProfilePhoto();
@@ -177,7 +176,6 @@ public class UserAccountUI : MonoBehaviour
             else
             {
                 UserAccountManager.Instance.ProfilePhotoIndex = int.Parse(result.Data["ProfilePhoto"].Value);
-                //Debug.Log("profile: " + result.Data["ProfilePhoto"].Value);
                 setProfilePhoto = true;
 
             }
@@ -185,6 +183,26 @@ public class UserAccountUI : MonoBehaviour
         {
             Debug.Log("Got error retrieving user data:");
             Debug.Log(error.GenerateErrorReport());
+        });
+    }
+    int collusionMoney;
+    bool setupMoney = false;
+
+    void GetVirtualCurrency()
+    {
+        GetUserInventoryRequest requestInventory = new GetUserInventoryRequest();
+
+        PlayFabClientAPI.GetUserInventory(requestInventory, result =>
+        {
+            result.VirtualCurrency.TryGetValue("CL", out collusionMoney);
+            UserAccountManager.Instance.MONEY = collusionMoney;
+            Debug.Log("MONEY : " + collusionMoney);
+            setupMoney = true;
+        }, error =>
+
+        {
+            GetVirtualCurrency();
+            Debug.Log(error.ErrorMessage);
         });
     }
     #endregion
