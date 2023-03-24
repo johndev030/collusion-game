@@ -26,7 +26,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <NoWarn>0169</NoWarn>
-    <AllowUnsafeBlocks>False</AllowUnsafeBlocks>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -35,7 +35,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <NoWarn>0169</NoWarn>
-    <AllowUnsafeBlocks>False</AllowUnsafeBlocks>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup>
     <NoConfig>true</NoConfig>
@@ -55,7 +55,11 @@
   <ItemGroup>
     <Compile Include="Assets/Demigiant/DOTweenPro/DOTweenProShortcuts.cs" />
     <Compile Include="Assets/Demigiant/DOTweenPro/DOTweenTextMeshPro.cs" />
+    <Compile Include="Assets/Game/Scripts/WALLET.cs" />
+    <Compile Include="Assets/Game/Scripts/Wrapper/Token.cs" />
     <Compile Include="Assets/Game/Scripts/ProfileEditing.cs" />
+    <Compile Include="Assets/Game/Scripts/PlayerDashboard.cs" />
+    <Compile Include="Assets/Game/Scripts/Tokens.cs" />
     <Compile Include="Assets/Game/Scripts/UserAccountManager.cs" />
     <Compile Include="Assets/Demigiant/DOTween/Modules/DOTweenModulePhysics2D.cs" />
     <Compile Include="Assets/Demigiant/DOTweenPro/DOTweenAnimation.cs" />
@@ -69,7 +73,10 @@
     <Compile Include="Assets/Demigiant/DOTween/Modules/DOTweenModuleUI.cs" />
     <Compile Include="Assets/Demigiant/DOTween/Modules/DOTweenModuleAudio.cs" />
     <Compile Include="Assets/Game/Scripts/UserAccountUI.cs" />
-    <Compile Include="Assets/Game/Scripts/Tokens.cs" />
+    <Compile Include="Assets/Game/Scripts/GuildController.cs" />
+    <Compile Include="Assets/Game/Scripts/Wrapper/InventoryItem.cs" />
+    <Compile Include="Assets/NotificationManager.cs" />
+    <Compile Include="Assets/Game/Scripts/NotificationDetails.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets/Demigiant/readme_DOTweenPro.txt" />
@@ -684,6 +691,10 @@
     <ProjectReference Include="Unity.TextMeshPro.Editor.csproj">
       <Project>{B838BE5C-DF5C-CD30-610F-CB3CE0C2BC3F}</Project>
       <Name>Unity.TextMeshPro.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="PlayFabMultiplayerSDK.csproj">
+      <Project>{E70870E0-9ECB-AB94-E8DC-BD847515EBAE}</Project>
+      <Name>PlayFabMultiplayerSDK</Name>
     </ProjectReference>
     <ProjectReference Include="Unity.VisualStudio.Editor.csproj">
       <Project>{75419F4E-4334-A188-7248-15B39465DAAC}</Project>

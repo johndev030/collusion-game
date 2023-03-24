@@ -93,8 +93,8 @@
     <Compile Include="Assets/PlayFabSDK/Insights/PlayFabEvents.cs" />
     <Compile Include="Assets/PlayFabSDK/Experimentation/PlayFabExperimentationModels.cs" />
     <Compile Include="Assets/PlayFabSDK/Shared/Public/PluginContractKey.cs" />
-    <Compile Include="Assets/PlayFabSDK/Events/PlayFabEventsInstanceAPI.cs" />
     <Compile Include="Assets/PlayFabSDK/Client/PlayFabDeviceUtil.cs" />
+    <Compile Include="Assets/PlayFabSDK/Events/PlayFabEventsInstanceAPI.cs" />
     <Compile Include="Assets/PlayFabSDK/Matchmaker/PlayFabMatchmakerModels.cs" />
     <Compile Include="Assets/PlayFabSDK/Shared/Internal/SimpleJson.cs" />
     <Compile Include="Assets/PlayFabSDK/Shared/Public/IPlayFabPlugin.cs" />
@@ -144,6 +144,19 @@
     <Compile Include="Assets/PlayFabSDK/Authentication/PlayFabAuthenticationInstanceAPI.cs" />
     <Compile Include="Assets/PlayFabSDK/Shared/Public/PlayFabEvents.cs" />
     <Compile Include="Assets/PlayFabSDK/Insights/PlayFabInsightsAPI.cs" />
+    <Compile Include="Assets/PlayFabSDK/Shared/Ionic.Zlib/Inflate.cs" />
+    <Compile Include="Assets/PlayFabSDK/Shared/Ionic.Zlib/ZlibStream.cs" />
+    <Compile Include="Assets/PlayFabSDK/Shared/Ionic.Zlib/GZipStream.cs" />
+    <Compile Include="Assets/PlayFabSDK/Shared/Ionic.Zlib/ParallelDeflateOutputStream.cs" />
+    <Compile Include="Assets/PlayFabSDK/Shared/Ionic.Zlib/ZlibBaseStream.cs" />
+    <Compile Include="Assets/PlayFabSDK/Shared/Ionic.Zlib/DeflateStream.cs" />
+    <Compile Include="Assets/PlayFabSDK/Shared/Ionic.Zlib/ZTree.cs" />
+    <Compile Include="Assets/PlayFabSDK/Shared/Ionic.Zlib/InfTree.cs" />
+    <Compile Include="Assets/PlayFabSDK/Shared/Ionic.Zlib/Zlib.cs" />
+    <Compile Include="Assets/PlayFabSDK/Shared/Ionic.Zlib/Deflate.cs" />
+    <Compile Include="Assets/PlayFabSDK/Shared/Ionic.Zlib/CRC32.cs" />
+    <Compile Include="Assets/PlayFabSDK/Shared/Ionic.Zlib/ZlibConstants.cs" />
+    <Compile Include="Assets/PlayFabSDK/Shared/Ionic.Zlib/ZlibCodec.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets/PlayFabSDK/link.xml" />

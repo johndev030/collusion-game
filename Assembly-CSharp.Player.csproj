@@ -26,7 +26,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <NoWarn>0169</NoWarn>
-    <AllowUnsafeBlocks>False</AllowUnsafeBlocks>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -35,7 +35,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <NoWarn>0169</NoWarn>
-    <AllowUnsafeBlocks>False</AllowUnsafeBlocks>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup>
     <NoConfig>true</NoConfig>
@@ -55,7 +55,11 @@
   <ItemGroup>
     <Compile Include="Assets/Demigiant/DOTweenPro/DOTweenProShortcuts.cs" />
     <Compile Include="Assets/Demigiant/DOTweenPro/DOTweenTextMeshPro.cs" />
+    <Compile Include="Assets/Game/Scripts/WALLET.cs" />
+    <Compile Include="Assets/Game/Scripts/Wrapper/Token.cs" />
     <Compile Include="Assets/Game/Scripts/ProfileEditing.cs" />
+    <Compile Include="Assets/Game/Scripts/PlayerDashboard.cs" />
+    <Compile Include="Assets/Game/Scripts/Tokens.cs" />
     <Compile Include="Assets/Game/Scripts/UserAccountManager.cs" />
     <Compile Include="Assets/Demigiant/DOTween/Modules/DOTweenModulePhysics2D.cs" />
     <Compile Include="Assets/Demigiant/DOTweenPro/DOTweenAnimation.cs" />
@@ -69,7 +73,10 @@
     <Compile Include="Assets/Demigiant/DOTween/Modules/DOTweenModuleUI.cs" />
     <Compile Include="Assets/Demigiant/DOTween/Modules/DOTweenModuleAudio.cs" />
     <Compile Include="Assets/Game/Scripts/UserAccountUI.cs" />
-    <Compile Include="Assets/Game/Scripts/Tokens.cs" />
+    <Compile Include="Assets/Game/Scripts/GuildController.cs" />
+    <Compile Include="Assets/Game/Scripts/Wrapper/InventoryItem.cs" />
+    <Compile Include="Assets/NotificationManager.cs" />
+    <Compile Include="Assets/Game/Scripts/NotificationDetails.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets/Demigiant/readme_DOTweenPro.txt" />
@@ -664,6 +671,10 @@
     <ProjectReference Include="Unity.Recorder.Base.csproj">
       <Project>{4702CD9A-6019-2A17-1E64-0EB53BCBEAEF}</Project>
       <Name>Unity.Recorder.Base</Name>
+    </ProjectReference>
+    <ProjectReference Include="PlayFabMultiplayerSDK.csproj">
+      <Project>{E70870E0-9ECB-AB94-E8DC-BD847515EBAE}</Project>
+      <Name>PlayFabMultiplayerSDK</Name>
     </ProjectReference>
     <ProjectReference Include="Unity.Timeline.csproj">
       <Project>{43EAB166-F4A8-3606-7469-5A922D885757}</Project>

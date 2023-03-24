@@ -13,10 +13,15 @@ public class MainMenuUIController : MonoBehaviour
     public Text userNameText;
     public Text nameText;
     public Image[] profilePhoto;
+    public Text[] moneyTexts;
+    public Text[] uniqueTokensTexts;
     public GameObject profileEditingPanel;
-    [Space(10)]
-    [Header("PlayerDashboard")]
-    public Text timeElapsed;
+
+
+    public GameObject[] panels;
+    public Button[] panelButton;
+
+
     public static MainMenuUIController Instance;
     private void Awake()
     {
@@ -34,6 +39,15 @@ public class MainMenuUIController : MonoBehaviour
         {
             profileEditingPanel.SetActive(false);
         }
+
+        for (int i = 0; i < moneyTexts.Length; i++)
+        {
+            moneyTexts[i].text = "$"+UserAccountManager.Instance.MONEY.ToString();
+        }
+        //for (int i = 0; i < uniqueTokensTexts.Length; i++)
+        //{
+        //    uniqueTokensTexts[i].text = UserAccountManager.Instance.uniqueTokens.Count.ToString()+"/100";
+        //}
     }
 
     // Start is called before the first frame update
@@ -47,27 +61,21 @@ public class MainMenuUIController : MonoBehaviour
         userNameText.text = "@"+UserAccountManager.Instance.UserName;
     }
 
-    /*
-    void UpdateDisplayName(string displayName)
+    public void OpenPanel(int index)
     {
-        PlayFabClientAPI.UpdateUserTitleDisplayName(new UpdateUserTitleDisplayNameRequest
+        for (int i = 0; i < panels.Length; i++)
         {
-            DisplayName = displayName
-        }, result => {
-            Debug.Log("The player's display name is now: " + result.DisplayName);
-        }, error => Debug.LogError(error.GenerateErrorReport()));
-    }
-    void GetPlayerProfile(string playFabId)
-    {
-        PlayFabClientAPI.GetPlayerProfile(new GetPlayerProfileRequest()
-        {
-            PlayFabId = playFabId,
-            ProfileConstraints = new PlayerProfileViewConstraints()
+            if(i == index)
             {
-                ShowDisplayName = true
+                panels[i].SetActive(true);
+                panelButton[i].image.color = Color.white;
             }
-        },
-        result => Debug.Log("The player's DisplayName profile data is: " + result.PlayerProfile.DisplayName),
-        error => Debug.LogError(error.GenerateErrorReport()));
-    }*/
+            else
+            {
+                panelButton[i].image.color = Color.grey/2;
+                panels[i].SetActive(false);
+            }
+        }
+    }
+
 }

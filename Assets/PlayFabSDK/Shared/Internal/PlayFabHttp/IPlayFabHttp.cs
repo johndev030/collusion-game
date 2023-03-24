@@ -48,7 +48,6 @@ namespace PlayFab.Internal
         public PlayFabApiSettings settings;
         public PlayFabAuthenticationContext context;
         public IPlayFabInstanceApi instanceApi;
-        public bool CalledGetResponse = false;
 
         public CallRequestContainer()
         {

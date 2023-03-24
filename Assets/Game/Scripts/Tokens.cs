@@ -1,6 +1,5 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
-using UnityEngine;
 
 [System.Serializable]
 public class Tokens 
@@ -17,7 +16,7 @@ public class Tokens
     0,0,0,0,0,0,0,0,0,0,
     0,0,0,0,0,0,0,0,0,0
  };
-
+    /*
     //public int T1Count = 10;
     //public int T2Count = 0;
     //public int T3Count = 0;
@@ -127,4 +126,18 @@ public class Tokens
     //public int T98Count = 0;
     //public int T99Count = 0;
     //public int T100Count = 0;
+    */
+}
+[System.Serializable]
+public class ItemOwnerDetail
+{
+    public List<string> ownerName;
+    public List<string> ownerPlayfabId;
+
+    public ItemOwnerDetail()
+    {
+        ownerName = new List<string>();
+        ownerPlayfabId = new List<string>();
+    }
+
 }

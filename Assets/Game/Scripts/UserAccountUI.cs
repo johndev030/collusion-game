@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using PlayFab;
 using PlayFab.ClientModels;
+using JetBrains.Annotations;
 
 public class UserAccountUI : MonoBehaviour
 {
@@ -25,7 +26,7 @@ public class UserAccountUI : MonoBehaviour
             toggle.isOn = false;
         }
     }
-    string email_register, password_register, userName_register;
+    string email_register, password_register, userName_register, displayName;
 
     private void OnEnable()
     {
@@ -67,7 +68,7 @@ public class UserAccountUI : MonoBehaviour
             //print("asyncLoad.progress" + asyncLoad.progress);
 
             // Check if the load has finished
-            if (asyncLoad.progress >= 0.9f && setProfilePhoto && setupMoney)
+            if (asyncLoad.progress >= 0.9f && setProfilePhoto && setupMoney && fetchTokensData)
             {
                 loadingBar.fillAmount = 1;
                 //Change the Text to show the Scene is ready
@@ -91,6 +92,7 @@ public class UserAccountUI : MonoBehaviour
     {
         GetUserData();
         GetVirtualCurrency();
+        GetTokenInventory();
         StartCoroutine(LoadMainMenu());
     }
     public void DisableDisplayMessage()
@@ -108,6 +110,10 @@ public class UserAccountUI : MonoBehaviour
         email_register = _email;
     }
 
+    public void UpdateDisplayName(string _displayName)
+    {
+        displayName = _displayName;
+    }
     public void UpdatePassword(string _password)
     {
         password_register = _password;
@@ -116,7 +122,7 @@ public class UserAccountUI : MonoBehaviour
     public void Register()
     {
         loadingScreen.SetActive(true);
-        UserAccountManager.Instance.CreateUser(userName_register, email_register, password_register);
+        UserAccountManager.Instance.CreateUser(userName_register, email_register, password_register, displayName);
     }
 
     string password_login, userName_login;
@@ -204,6 +210,39 @@ public class UserAccountUI : MonoBehaviour
             GetVirtualCurrency();
             Debug.Log(error.ErrorMessage);
         });
+    }
+
+    bool fetchTokensData = false;
+    void GetTokenInventory()
+    {
+        PlayFabClientAPI.GetUserInventory(new GetUserInventoryRequest(),
+           result =>
+           {
+               if (result.Inventory == null)
+               {
+                   Debug.Log("No Tokens Data ");
+               }
+               else
+               {
+                   //Debug.Log("Tokens: " + result.Data["Tokens"]);
+                   List<ItemInstance> items = result.Inventory;
+                   for (int i = 0; i < items.Count; i++)
+                   {
+                       string itemId = items[i].ItemId;
+//                       Debug.Log("tokenID = " + itemId);
+                       int id = int.Parse((itemId.Substring(3, itemId.Length-3)));
+  //                     Debug.Log("tokenID = " + itemId + " Id =" + id);
+                       UserAccountManager.Instance.uniqueTokens.Add(id);
+                   }
+                   fetchTokensData = true;
+               }
+           },
+           error =>
+           {
+               Debug.Log("Got error getting titleData:");
+               Debug.Log(error.GenerateErrorReport());
+               GetTokenInventory();
+           });
     }
     #endregion
 }

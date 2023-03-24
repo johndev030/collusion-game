@@ -5,8 +5,6 @@ namespace PlayFab.Events
 {
     public partial class PlayFabEvents
     {
-        public event PlayFabRequestEvent<AuthenticateCustomIdRequest> OnAuthenticationAuthenticateGameServerWithCustomIdRequestEvent;
-        public event PlayFabResultEvent<AuthenticateCustomIdResult> OnAuthenticationAuthenticateGameServerWithCustomIdResultEvent;
         public event PlayFabRequestEvent<DeleteRequest> OnAuthenticationDeleteRequestEvent;
         public event PlayFabResultEvent<EmptyResponse> OnAuthenticationDeleteResultEvent;
         public event PlayFabRequestEvent<GetEntityTokenRequest> OnAuthenticationGetEntityTokenRequestEvent;

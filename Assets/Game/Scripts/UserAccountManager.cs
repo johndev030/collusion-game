@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using PlayFab;
 using PlayFab.ClientModels;
+using PlayFab.Json;
+using PlayFab.ServerModels;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -9,8 +11,10 @@ using UnityEngine.Events;
 
 public class UserAccountManager : MonoBehaviour
 {
-    public string UserName;
+    public string UserName, DisplayName;
     public int MONEY;
+    public int TOKENCOUNT;
+    public string timeSinceGameStart;
 
     public string PlayFabID;
     public int ProfilePhotoIndex;
@@ -21,11 +25,9 @@ public class UserAccountManager : MonoBehaviour
     public static UnityEvent<string> OnRegistrationSuccessfull = new UnityEvent<string>();
     public static UnityEvent<string> OnRegistrationFailed = new UnityEvent<string>();
 
-
-    // Start is called before the first frame update
     void Awake()
     {
-        PlayerPrefs.DeleteAll();
+        //PlayerPrefs.DeleteAll();
 
         if (Instance == null)
         {
@@ -47,8 +49,7 @@ public class UserAccountManager : MonoBehaviour
         }
     }
 
-    public void CreateUser(string userName, string email, string password)
-
+    public void CreateUser(string userName, string email, string password, string displayName)
     {
         PlayFabClientAPI.RegisterPlayFabUser(
             new RegisterPlayFabUserRequest()
@@ -56,6 +57,7 @@ public class UserAccountManager : MonoBehaviour
                 Email = email,
                 Password = password,
                 Username = userName,
+                DisplayName = displayName,
                 RequireBothUsernameAndEmail = true
 
             },
@@ -63,7 +65,9 @@ public class UserAccountManager : MonoBehaviour
             {
                 Debug.Log($"Successfully account created: ,{userName},{email}");
                 OnRegistrationSuccessfull.Invoke("Account Registered Successfully, Logging In");
-                GetTokensCount();
+                DisplayName = displayName;
+                UserName = userName;
+                GetTitleData();
                 FindObjectOfType<UserAccountUI>().loadingScreen.SetActive(true);
                 Login(userName, password);
             },
@@ -74,7 +78,6 @@ public class UserAccountManager : MonoBehaviour
             }
 
             );
-
     }
     public void Login(string userName, string password)
 
@@ -99,7 +102,7 @@ public class UserAccountManager : MonoBehaviour
                 }
                 OnLoginSuccess.Invoke("Account Login Successful");
                 //SetTitleData(tokens);
-
+                //SetTitleData();
 
             },
             error =>
@@ -111,12 +114,10 @@ public class UserAccountManager : MonoBehaviour
             );
 
     }
-
-
     public void BuyToken(int price)
     {
         PlayFabClientAPI.SubtractUserVirtualCurrency(
-            new SubtractUserVirtualCurrencyRequest()
+            new PlayFab.ClientModels.SubtractUserVirtualCurrencyRequest()
             {
                 VirtualCurrency = "CL",
                 Amount = price
@@ -133,6 +134,30 @@ public class UserAccountManager : MonoBehaviour
             );
     }
 
+    public void SetTitleData()
+    {
+        //string tk = JsonUtility.ToJson(tokens);
+        PlayFabServerAPI.SetTitleData(
+            new PlayFab.ServerModels.SetTitleDataRequest
+            {
+                Key = "TimeSinceGameStart",
+                Value = DateTime.Today.ToString()
+            },
+            result =>
+            {
+                //for (int i = 0; i < uniqueTokens.Count; i++)
+                //{
+                Debug.Log("TimeSinceGameStart: " + DateTime.Today.ToString());
+                //}
+                //GetTokensCount();
+            },
+            error =>
+            {
+                Debug.Log("Got error setting titleData:");
+                Debug.Log(error.GenerateErrorReport());
+            }
+        ); ;
+    }
 
     #region Initial Token Assigning
     public void SetTitleData(Tokens tokens)
@@ -143,13 +168,12 @@ public class UserAccountManager : MonoBehaviour
             {
                 Key = "Tokens",
                 Value = tk
-
             },
             result =>
             {
-                for (int i = 0; i < userTokens.Count; i++)
+                for (int i = 0; i < uniqueTokens.Count; i++)
                 {
-                    Debug.Log("TOKEN_" +userTokens[i]+" is ASSIGNED");
+                    Debug.Log("TOKEN_" + uniqueTokens[i] + " is ASSIGNED");
                 }
                 //GetTokensCount();
             },
@@ -161,18 +185,20 @@ public class UserAccountManager : MonoBehaviour
         );
     }
     public Tokens tokens;
-    public void GetTokensCount()
+    public void GetTitleData()
     {
         PlayFabServerAPI.GetTitleData(new PlayFab.ServerModels.GetTitleDataRequest(),
             result =>
             {
-                if (result.Data == null || !result.Data.ContainsKey("Tokens"))
+                if (result.Data == null)
                 {
                     Debug.Log("No Tokens Data " + result.Data);
-
                 }
-                else { Debug.Log("Tokens: " + result.Data["Tokens"]);
+                else
+                {
+                    //Debug.Log("Tokens: " + result.Data["Tokens"]);
                     tokens = JsonUtility.FromJson<Tokens>(result.Data["Tokens"]);
+                    timeSinceGameStart = result.Data["TimeSinceGameStart"];
                     AssignRandomTokens();
                 }
             },
@@ -180,24 +206,119 @@ public class UserAccountManager : MonoBehaviour
             {
                 Debug.Log("Got error getting titleData:");
                 Debug.Log(error.GenerateErrorReport());
-                GetTokensCount();
+                GetTitleData();
             });
     }
-    List<int> userTokens = new List<int>();
+    public List<int> uniqueTokens = new List<int>();
     void AssignRandomTokens()
     {
-        
         do
         {
             int temp = UnityEngine.Random.Range(1, 101);
-            if(tokens.TokenCount[temp] < 5000)
+            if (tokens.TokenCount[temp] < 5000)
             {
-                userTokens.Add(temp);
+                uniqueTokens.Add(temp);
                 tokens.TokenCount[temp] += 1;
+
             }
-        } while (userTokens.Count != 5);
+        } while (uniqueTokens.Count != 5);
 
         SetTitleData(tokens);
+        SetCatalogItem();
+    }
+    internal bool uniqueTokensGranted = false;
+
+    ItemOwnerDetail itemOwnerDetail;
+    void SetCatalogItem()
+    {
+        List<string> itemIds = new List<string>();
+        for (int i = 0; i < uniqueTokens.Count; i++)
+        {
+            itemIds.Add("tk_" + uniqueTokens[i]);
+        }
+
+        PlayFabClientAPI.ExecuteCloudScript(new ExecuteCloudScriptRequest()
+        {
+            FunctionName = "grantToken",
+            FunctionParameter = new { ITEMS = itemIds },
+        },
+        OnCloudAddItem01,
+        OnErrorShared);
+
+        /*
+        for (int i = 0; i < itemGrants.Count; i++)
+        {
+            PurchaseItemRequest request = new PurchaseItemRequest();
+
+            request.ItemId = itemGrants[i];
+            request.Price = 0;
+            request.VirtualCurrency = "CL";
+            request.CatalogVersion = "Tokens";
+            PlayFabClientAPI.PurchaseItem(request,
+             result =>
+             {
+                 for (int i = 0; i < result.Items.Count; i++)
+                 {
+                     Debug.Log("Purchased: " + result.Items[i]);
+                     if (result.Items[i].CustomData != null)
+                     {
+                         itemOwnerDetail = JsonUtility.FromJson<ItemOwnerDetail>(result.Items[i].CustomData["Owners"]);
+                         itemOwnerDetail.ownerPlayfabId.Add(PlayFabID);
+                         itemOwnerDetail.ownerName.Add(DisplayName);
+                         UpdateItemData();
+                     }
+                     else
+                     {
+                         itemOwnerDetail = new ItemOwnerDetail();
+                         itemOwnerDetail.ownerName.Add(name);
+                         itemOwnerDetail.ownerPlayfabId.Add(PlayFabID);
+                         UpdateItemData();
+
+                     }
+                 }
+             },
+             error => { Debug.Log("Error: " + error.Error); }
+            );
+        }*/
+    }
+
+    void UpdateItemData()
+    {
+        UpdateUserInventoryItemDataRequest update = new UpdateUserInventoryItemDataRequest();
+        string jsonData = JsonUtility.ToJson(itemOwnerDetail);
+        //Dictionary<string, string> keyValuePairs = jsonData;
+        update.Data.Add("Owners", jsonData);
+        PlayFabServerAPI.UpdateUserInventoryItemCustomData(update,
+            result =>
+            {
+                Debug.Log("OwnerName Updated");
+            },
+            error =>
+            {
+                Debug.Log("OwnerName Not Updated");
+            });
+    }
+
+    public void GrantTokens(List<string> itemGrants)
+    {
+        PlayFabClientAPI.ExecuteCloudScript(new ExecuteCloudScriptRequest()
+        {
+            FunctionName = "grantToken",
+            FunctionParameter = new { itemGrants },
+        },
+        OnCloudAddItem01,
+        OnErrorShared);
+    }
+    private static void OnCloudAddItem01(PlayFab.ClientModels.ExecuteCloudScriptResult result)
+    {
+        Debug.Log(PlayFabSimpleJson.SerializeObject(result.FunctionResult));
+        JsonObject jsonResult = (JsonObject)result.FunctionResult;
+        object messageValue; jsonResult.TryGetValue("messageValue", out messageValue);
+        Debug.Log((string)messageValue);
+    }
+    private static void OnErrorShared(PlayFabError error)
+    {
+        Debug.Log(error.GenerateErrorReport());
     }
     #endregion
 }
