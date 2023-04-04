@@ -139,5 +139,4 @@ public class ItemOwnerDetail
         ownerName = new List<string>();
         ownerPlayfabId = new List<string>();
     }
-
 }

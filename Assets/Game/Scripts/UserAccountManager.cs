@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using PlayFab;
 using PlayFab.ClientModels;
+using PlayFab.GroupsModels;
 using PlayFab.Json;
 using PlayFab.ServerModels;
 using UnityEngine;
@@ -11,13 +12,25 @@ using UnityEngine.Events;
 
 public class UserAccountManager : MonoBehaviour
 {
+    public bool deletePlayerPrefs;
+    [Space(5)]
     public string UserName, DisplayName;
     public int MONEY;
     public int TOKENCOUNT;
     public string timeSinceGameStart;
-
+    public PlayFab.ClientModels.EntityTokenResponse EntityToken;
     public string PlayFabID;
     public int ProfilePhotoIndex;
+    public bool IsTeamMember;
+    public string TeamName;
+    public string GroupName;
+    public string GroupID;
+    public PlayFab.GroupsModels.EntityKey GroupEntity;
+    public List<GroupWithRoles> AllGroups;
+    public ListGroupMembersResponse ListGroupMembers;
+    public List<GroupInvitation> groupInvitations;
+    public List<GroupApplication> groupApplications;
+
 
     public static UserAccountManager Instance;
     public static UnityEvent<string> OnLoginSuccess = new UnityEvent<string>();
@@ -25,9 +38,21 @@ public class UserAccountManager : MonoBehaviour
     public static UnityEvent<string> OnRegistrationSuccessfull = new UnityEvent<string>();
     public static UnityEvent<string> OnRegistrationFailed = new UnityEvent<string>();
 
+
+    //PlayerDashboard
+    public static UnityEvent<string> OnGroupCreationResult = new UnityEvent<string>();
+    public static UnityEvent<string> OnListGroupMembersResult = new UnityEvent<string>();
+
+    public static UnityEvent<string> OnGroupJoinResult = new UnityEvent<string>();
+    public static UnityEvent<string> OnListGroupResult = new UnityEvent<string>();
+    public static UnityEvent<string> OnListMembershipOpportunities = new UnityEvent<string>();
+
+
+
     void Awake()
     {
-        //PlayerPrefs.DeleteAll();
+        if (deletePlayerPrefs)
+            PlayerPrefs.DeleteAll();
 
         if (Instance == null)
         {
@@ -92,8 +117,8 @@ public class UserAccountManager : MonoBehaviour
             {
                 //Debug.Log($"Successfully account created: ,{userName}");
                 UserName = userName;
-                PlayFabID = response.PlayFabId;
-
+                PlayFabID = response.PlayFabId;           
+                EntityToken = response.EntityToken;
                 if (Constants.REMEMBER_ME == "True")
                 {
                     Constants.USERNAME = userName;
@@ -214,14 +239,14 @@ public class UserAccountManager : MonoBehaviour
     {
         do
         {
-            int temp = UnityEngine.Random.Range(1, 101);
+            int temp = UnityEngine.Random.Range(0, 100);
             if (tokens.TokenCount[temp] < 5000)
             {
-                uniqueTokens.Add(temp);
+                uniqueTokens.Add(temp+1);
                 tokens.TokenCount[temp] += 1;
-
+                Debug.Log("uniqueTokens " + uniqueTokens.Count);
             }
-        } while (uniqueTokens.Count != 5);
+        } while (uniqueTokens.Count <5);
 
         SetTitleData(tokens);
         SetCatalogItem();
@@ -237,20 +262,20 @@ public class UserAccountManager : MonoBehaviour
             itemIds.Add("tk_" + uniqueTokens[i]);
         }
 
-        PlayFabClientAPI.ExecuteCloudScript(new ExecuteCloudScriptRequest()
-        {
-            FunctionName = "grantToken",
-            FunctionParameter = new { ITEMS = itemIds },
-        },
-        OnCloudAddItem01,
-        OnErrorShared);
+        //PlayFabClientAPI.ExecuteCloudScript(new ExecuteCloudScriptRequest()
+        //{
+        //    FunctionName = "grantToken",
+        //    FunctionParameter = new { ITEMS = itemIds },
+        //},
+        //OnCloudAddItem01,
+        //OnErrorShared);
 
-        /*
-        for (int i = 0; i < itemGrants.Count; i++)
+        
+        for (int i = 0; i < itemIds.Count; i++)
         {
             PurchaseItemRequest request = new PurchaseItemRequest();
 
-            request.ItemId = itemGrants[i];
+            request.ItemId = itemIds[i];
             request.Price = 0;
             request.VirtualCurrency = "CL";
             request.CatalogVersion = "Tokens";
@@ -272,14 +297,13 @@ public class UserAccountManager : MonoBehaviour
                          itemOwnerDetail = new ItemOwnerDetail();
                          itemOwnerDetail.ownerName.Add(name);
                          itemOwnerDetail.ownerPlayfabId.Add(PlayFabID);
-                         UpdateItemData();
-
+                         //UpdateItemData();
                      }
                  }
              },
              error => { Debug.Log("Error: " + error.Error); }
             );
-        }*/
+        }
     }
 
     void UpdateItemData()

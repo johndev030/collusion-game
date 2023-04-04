@@ -24,9 +24,10 @@ public class WALLET : MonoBehaviour
         }
         for (int i = 0; i < UserAccountManager.Instance.uniqueTokens.Count; i++)
         {
-            tokens[UserAccountManager.Instance.uniqueTokens[i]].tokenImage.color = activeColor;
-            tokens[UserAccountManager.Instance.uniqueTokens[i]].tokenCount+=1;
-            tokens[UserAccountManager.Instance.uniqueTokens[i]].EnableToken();
+
+            tokens[UserAccountManager.Instance.uniqueTokens[i]-1].tokenImage.color = activeColor;
+            tokens[UserAccountManager.Instance.uniqueTokens[i]-1].tokenCount+=1;
+            tokens[UserAccountManager.Instance.uniqueTokens[i]-1].EnableToken();
 
         }
     }

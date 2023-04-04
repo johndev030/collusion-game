@@ -83,9 +83,9 @@ namespace PlayFab
 #endif
 
             //Only Used on iOS & Android
-#if UNITY_5_6_OR_NEWER && (UNITY_ANDROID || UNITY_IOS || UNITY_IPHONE || UNITY_STANDALONE_OSX || UNITY_EDITOR_OSX)
+#if UNITY_5_6_OR_NEWER && (UNITY_ANDROID || UNITY_IOS || UNITY_IPHONE)
             ProductBundle = Application.identifier;
-#elif UNITY_ANDROID || UNITY_IOS || UNITY_IPHONE || UNITY_STANDALONE_OSX || UNITY_EDITOR_OSX
+#elif UNITY_ANDROID || UNITY_IOS || UNITY_IPHONE
             ProductBundle = Application.bundleIdentifier;
 #endif
 

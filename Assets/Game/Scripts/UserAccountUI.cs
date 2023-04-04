@@ -140,18 +140,25 @@ public class UserAccountUI : MonoBehaviour
     public void Login()
     {
         loadingScreen.SetActive(true);
+        Debug.Log("userName_login " + userName_login);
+
+        Debug.Log("password " + password_login);
+
         UserAccountManager.Instance.Login(userName_login, password_login);
     }
 
 
     #region Default Values
     bool setProfilePhoto = false;
-    public void SetProfilePhoto()
+    public void SetTitleData()
     {
         PlayFabClientAPI.UpdateUserData(new UpdateUserDataRequest()
         {
             Data = new Dictionary<string, string>() {
             { "ProfilePhoto", "0" },
+                { "isTeamMember", "false"},
+                { "GroupID", "000000000"},
+
         }
         },
         result =>
@@ -163,7 +170,7 @@ public class UserAccountUI : MonoBehaviour
         {
             Debug.Log("Profile photo not updated");
             Debug.Log(error.GenerateErrorReport());
-            SetProfilePhoto();
+            SetTitleData();
         });
     }
 
@@ -171,19 +178,19 @@ public class UserAccountUI : MonoBehaviour
     {
         PlayFabClientAPI.GetUserData(new GetUserDataRequest()
         {
-            PlayFabId = UserAccountManager.Instance.PlayFabID, //THIS LİNE ISN'T WORKİNG//
+            PlayFabId = UserAccountManager.Instance.PlayFabID, 
             Keys = null
         }, result =>
         {
-            if (result.Data == null || !result.Data.ContainsKey("ProfilePhoto"))
+            if (result.Data == null || !result.Data.ContainsKey("ProfilePhoto") || !result.Data.ContainsKey("isTeamMember") || !result.Data.ContainsKey("GroupID"))
             {
-                SetProfilePhoto();
+                SetTitleData();
             }
             else
             {
                 UserAccountManager.Instance.ProfilePhotoIndex = int.Parse(result.Data["ProfilePhoto"].Value);
+                UserAccountManager.Instance.IsTeamMember = bool.Parse(result.Data["isTeamMember"].Value);
                 setProfilePhoto = true;
-
             }
         }, (error) =>
         {
@@ -202,7 +209,7 @@ public class UserAccountUI : MonoBehaviour
         {
             result.VirtualCurrency.TryGetValue("CL", out collusionMoney);
             UserAccountManager.Instance.MONEY = collusionMoney;
-            Debug.Log("MONEY : " + collusionMoney);
+            //Debug.Log("MONEY : " + collusionMoney);
             setupMoney = true;
         }, error =>
 
@@ -215,6 +222,7 @@ public class UserAccountUI : MonoBehaviour
     bool fetchTokensData = false;
     void GetTokenInventory()
     {
+        UserAccountManager.Instance.uniqueTokens.Clear();
         PlayFabClientAPI.GetUserInventory(new GetUserInventoryRequest(),
            result =>
            {
@@ -229,9 +237,9 @@ public class UserAccountUI : MonoBehaviour
                    for (int i = 0; i < items.Count; i++)
                    {
                        string itemId = items[i].ItemId;
-//                       Debug.Log("tokenID = " + itemId);
-                       int id = int.Parse((itemId.Substring(3, itemId.Length-3)));
-  //                     Debug.Log("tokenID = " + itemId + " Id =" + id);
+                       //                       Debug.Log("tokenID = " + itemId);
+                       int id = int.Parse((itemId.Substring(3, itemId.Length - 3)));
+                       //                     Debug.Log("tokenID = " + itemId + " Id =" + id);
                        UserAccountManager.Instance.uniqueTokens.Add(id);
                    }
                    fetchTokensData = true;

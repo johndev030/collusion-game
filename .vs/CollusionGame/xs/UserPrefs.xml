@@ -1,21 +1,29 @@
 ﻿<Properties StartupConfiguration="{8B17B8D6-862C-6741-3D84-0F9608F90089}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Game/Scripts/NotificationDetails.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Game/Scripts/GuildController.cs">
     <Files>
-      <File FileName="Assets/Game/Scripts/PlayerDashboard.cs" Line="160" Column="1" />
-      <File FileName="Assets/Game/Scripts/UserAccountManager.cs" />
-      <File FileName="Assets/Game/Scripts/UserAccountUI.cs" />
+      <File FileName="Assets/Game/Scripts/GuildController.cs" Line="95" Column="47" IsPinned="True" />
+      <File FileName="Assets/Game/Scripts/UserAccountManager.cs" IsPinned="True" />
+      <File FileName="Assets/Game/Scripts/TeamMemberDetails.cs" IsPinned="True" />
+      <File FileName="Assets/ApplicantDetails.cs" IsPinned="True" />
+      <File FileName="Assets/Game/Scripts/GroupDetail.cs" Line="1" Column="1" />
+      <File FileName="Assets/Game/Scripts/TeamDetails.cs" />
+      <File FileName="Assets/Game/Scripts/PlayerDashboard.cs" />
       <File FileName="Assets/Game/Scripts/MainMenuUIController.cs" />
-      <File FileName="Assets/Game/Scripts/Constants.cs" />
-      <File FileName="Assets/Game/Scripts/Tokens.cs" />
       <File FileName="Assets/Game/Scripts/ProfileEditing.cs" />
-      <File FileName="Assets/Game/Scripts/GuildController.cs" Line="73" Column="35" />
-      <File FileName="Assets/NotificationManager.cs" Line="7" Column="31" />
-      <File FileName="Assets/Game/Scripts/NotificationDetails.cs" Line="9" Column="11" />
+      <File FileName="Assets/PlayFabSDK/Groups/PlayFabGroupsAPI.cs" />
+      <File FileName="Assets/Game/Scripts/Wrapper/AllGroups.cs" />
+      <File FileName="Assets/Game/Scripts/Wrapper/Token.cs" />
+      <File FileName="Assets/Game/Scripts/Tokens.cs" />
+      <File FileName="Assets/Game/Scripts/WALLET.cs" />
+      <File FileName="Assets/Game/Scripts/UserAccountUI.cs" />
+      <File FileName="Assets/Game/Scripts/Wrapper/InventoryItem.cs" />
+      <File FileName="Assets/PlayFabEditorExtensions/Editor/PlayFabEditor.cs" />
+      <File FileName="Assets/PlayFabSDK/Client/PlayFabClientAPI.cs" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="7a179643-ad3f-42ae-9d1b-3a11d72418b2" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="7374189c-f0be-44fa-bbbe-775942a005be" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>

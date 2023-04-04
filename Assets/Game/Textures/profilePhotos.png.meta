@@ -81,7 +81,7 @@ TextureImporter:
       213: -4174849023571939324
     second: profilePhotos_25
   externalObjects: {}
-  serializedVersion: 11
+  serializedVersion: 12
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -102,6 +102,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -140,6 +141,7 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 0
+  cookieLightType: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -191,6 +193,18 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -739,6 +753,32 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      profilePhotos_0: 6855897699009395895
+      profilePhotos_1: 1552033883316318004
+      profilePhotos_10: -4283259790859219574
+      profilePhotos_11: 4701527414393799504
+      profilePhotos_12: -1031726222698934503
+      profilePhotos_13: -1947335306123180074
+      profilePhotos_14: 3159508246365743187
+      profilePhotos_15: 1233241814944407402
+      profilePhotos_16: 5932886762682850795
+      profilePhotos_17: 2194461305048315560
+      profilePhotos_18: 1921717611494129842
+      profilePhotos_19: 6568891978685236737
+      profilePhotos_2: -6434233805993332130
+      profilePhotos_20: 8917343447779704379
+      profilePhotos_21: 2558323342266895307
+      profilePhotos_22: -2036541227715234571
+      profilePhotos_23: 2928472831017402208
+      profilePhotos_24: -1476493384359501439
+      profilePhotos_3: 4774930762057700991
+      profilePhotos_4: -8759084942065788842
+      profilePhotos_5: -541854916903384157
+      profilePhotos_6: -6928293842006183090
+      profilePhotos_7: -5838719825112806137
+      profilePhotos_8: -9020527010515113666
+      profilePhotos_9: -7916214898297044270
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

@@ -15,7 +15,7 @@ MonoBehaviour:
   TitleId: D4802
   DeveloperSecretKey: AKH8TDDXKJM8SM6I44E5RKPFIIN865R41BT395QTBI6KCEYF4Q
   ProductionEnvironmentUrl: 
-  RequestType: 0
+  RequestType: 2
   DisableDeviceInfo: 0
   DisableFocusTimeCollection: 0
   RequestTimeout: 2000

@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: PlayFabEditorPrefsSO
   m_EditorClassIdentifier: 
   DevAccountEmail: jeff.campbell.dev@gmail.com
-  DevAccountToken: w3y4sdknp7wkfq8xyi5kahds91bidwq1qywukg34zryg68tjey6ye9gwsznwrubyaoifwfus1jei19prcp4pq3a59myxkaock7a68kqa8om71yr9n9gy64expj1p7xoetcb95bwmmdqxkyhyep59nqrc9m6qt9cxc5fiz445btm4a3f54puiduosuhcxiisxcw3qwih5
+  DevAccountToken: 8etspqzjxwxzpi6wh1ac17i5uee18ocgia1o89uqjkfnwqfggqxujb3gnrnf7ksguax3jsgy59rnohf17kbdzzq4jho3dyrrgqigni784f5wjg3op6p8tejqmmypwd89jwzxcx3o83z6ubabktp3t1tfuyhozo6fxyeehnjc7ozchfxef68n3ek31tez9p13j53gdbaz
   AadAuthorization: 
   SelectedStudio: My Game Studio
   SdkPath: Assets/PlayFabSDK
   EdExPath: 
-  LocalCloudScriptPath: 
+  LocalCloudScriptPath: /Users/apple/Documents/Projects/ClientWorkspace/Nicholas/COLLUSION/CollusionGame/Assets/PlayFabEditorExtensions/Editor/Resources/.CloudScript.js
   PanelIsShown: 0
-  curMainMenuIdx: 1
+  curMainMenuIdx: 0
   curSubMenuIdx: 0

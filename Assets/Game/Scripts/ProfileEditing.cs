@@ -11,9 +11,9 @@ public class ProfileEditing : MonoBehaviour
 {
     public GameObject ProfileEditingPanel;
     public Button[] profileImageButton;
-    public Sprite[] profileImageSprites;
     public InputField inputFieldName;
     private int profilePhotoIndex;
+    Sprite[] profileImageSprites;
 
     [Space(10)]
     [Header("Questionier Data")]
@@ -33,6 +33,7 @@ public class ProfileEditing : MonoBehaviour
                 SelectPhoto(tempIndex);
             });
         }
+        profileImageSprites = MainMenuUIController.Instance.profileImageSprites;
         Setup();
     }
 
@@ -41,10 +42,6 @@ public class ProfileEditing : MonoBehaviour
         profilePhotoIndex = index;
     }
 
-    //private void Start()
-    //{
-    //    Setup();
-    //}
     public void SelectProfilePhoto(int index)
     {
         profilePhotoIndex = index;
@@ -59,7 +56,6 @@ public class ProfileEditing : MonoBehaviour
         {
             MainMenuUIController.Instance.profilePhoto[i].overrideSprite = profileImageSprites[UserAccountManager.Instance.ProfilePhotoIndex];
         }
-        //GetUserData();
         GetPlayerProfile(UserAccountManager.Instance.PlayFabID);
     }
     public void SetProfilePhoto()
@@ -91,7 +87,7 @@ public class ProfileEditing : MonoBehaviour
     {
         PlayFabClientAPI.GetUserData(new GetUserDataRequest()
         {
-            PlayFabId = UserAccountManager.Instance.PlayFabID, //THIS LİNE ISN'T WORKİNG//
+            PlayFabId = UserAccountManager.Instance.PlayFabID, 
             Keys = null
         }, result =>
         {
@@ -100,6 +96,7 @@ public class ProfileEditing : MonoBehaviour
             else
             {
                 profilePhotoIndex = int.Parse(result.Data["ProfilePhoto"].Value);
+                
                 for (int i = 0; i < MainMenuUIController.Instance.profilePhoto.Length; i++)
                 {
                     MainMenuUIController.Instance.profilePhoto[i].overrideSprite = profileImageSprites[int.Parse(result.Data["ProfilePhoto"].Value)];
@@ -128,7 +125,7 @@ public class ProfileEditing : MonoBehaviour
                 QuestionierPanel.SetActive(true);
             }
 
-        }, error => Debug.LogError(error.GenerateErrorReport())); ;
+        }, error => Debug.LogError(error.GenerateErrorReport()));
     }
     void GetPlayerProfile(string playFabId)
     {
@@ -142,8 +139,9 @@ public class ProfileEditing : MonoBehaviour
         },
         result =>
         {
-            Debug.Log("The player's DisplayName profile data is: " + result.PlayerProfile.DisplayName);
+//          Debug.Log("The player's DisplayName profile data is: " + result.PlayerProfile.DisplayName);
             MainMenuUIController.Instance.nameText.text = result.PlayerProfile.DisplayName;
+            UserAccountManager.Instance.DisplayName = result.PlayerProfile.DisplayName;
             inputFieldName.text = result.PlayerProfile.DisplayName;
         },
         error => Debug.LogError(error.GenerateErrorReport()));

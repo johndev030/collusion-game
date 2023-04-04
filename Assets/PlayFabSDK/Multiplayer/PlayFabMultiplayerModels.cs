@@ -640,14 +640,19 @@ namespace PlayFab.MultiplayerModels
         /// </summary>
         public ServerResourceConstraintParams ServerResourceConstraints;
         /// <summary>
-        /// When true, assets will be downloaded and uncompressed in memory, without the compressedversion being written first to
-        /// disc.
+        /// DEPRECATED - this is always true. Assets are downloaded and uncompressed in memory, without the compressedversion being
+        /// written first to disc.
         /// </summary>
+        [Obsolete("Use '' instead", false)]
         public bool? UseStreamingForAssetDownloads;
         /// <summary>
         /// The VM size to create the build on.
         /// </summary>
         public AzureVmSize? VmSize;
+        /// <summary>
+        /// The configuration for the VmStartupScript for the build
+        /// </summary>
+        public VmStartupScriptParams VmStartupScriptConfiguration;
     }
 
     [Serializable]
@@ -735,6 +740,10 @@ namespace PlayFab.MultiplayerModels
         /// The VM size the build was created on.
         /// </summary>
         public AzureVmSize? VmSize;
+        /// <summary>
+        /// The configuration for the VmStartupScript feature for the build
+        /// </summary>
+        public VmStartupScriptConfiguration VmStartupScriptConfiguration;
     }
 
     /// <summary>
@@ -807,14 +816,19 @@ namespace PlayFab.MultiplayerModels
         /// </summary>
         public string StartMultiplayerServerCommand;
         /// <summary>
-        /// When true, assets will be downloaded and uncompressed in memory, without the compressedversion being written first to
-        /// disc.
+        /// DEPRECATED - this is always true. Assets are downloaded and uncompressed in memory, without the compressedversion being
+        /// written first to disc.
         /// </summary>
+        [Obsolete("Use '' instead", false)]
         public bool? UseStreamingForAssetDownloads;
         /// <summary>
         /// The VM size to create the build on.
         /// </summary>
         public AzureVmSize? VmSize;
+        /// <summary>
+        /// The configuration for the VmStartupScript for the build
+        /// </summary>
+        public VmStartupScriptParams VmStartupScriptConfiguration;
         /// <summary>
         /// The crash dump configuration for the build.
         /// </summary>
@@ -907,6 +921,10 @@ namespace PlayFab.MultiplayerModels
         /// The VM size the build was created on.
         /// </summary>
         public AzureVmSize? VmSize;
+        /// <summary>
+        /// The configuration for the VmStartupScript feature for the build
+        /// </summary>
+        public VmStartupScriptConfiguration VmStartupScriptConfiguration;
     }
 
     /// <summary>
@@ -982,14 +1000,19 @@ namespace PlayFab.MultiplayerModels
         /// </summary>
         public string StartMultiplayerServerCommand;
         /// <summary>
-        /// When true, assets will be downloaded and uncompressed in memory, without the compressedversion being written first to
-        /// disc.
+        /// DEPRECATED - this is always true. Assets are downloaded and uncompressed in memory, without the compressedversion being
+        /// written first to disc.
         /// </summary>
+        [Obsolete("Use '' instead", false)]
         public bool? UseStreamingForAssetDownloads;
         /// <summary>
         /// The VM size to create the build on.
         /// </summary>
         public AzureVmSize? VmSize;
+        /// <summary>
+        /// The configuration for the VmStartupScript for the build
+        /// </summary>
+        public VmStartupScriptParams VmStartupScriptConfiguration;
     }
 
     [Serializable]
@@ -1080,6 +1103,10 @@ namespace PlayFab.MultiplayerModels
         /// The VM size the build was created on.
         /// </summary>
         public AzureVmSize? VmSize;
+        /// <summary>
+        /// The configuration for the VmStartupScript feature for the build
+        /// </summary>
+        public VmStartupScriptConfiguration VmStartupScriptConfiguration;
     }
 
     /// <summary>
@@ -1708,6 +1735,16 @@ namespace PlayFab.MultiplayerModels
         public string Type;
     }
 
+    public enum ExternalFriendSources
+    {
+        None,
+        Steam,
+        Facebook,
+        Xbox,
+        Psn,
+        All
+    }
+
     /// <summary>
     /// Request to find friends lobbies. Only a client can find friend lobbies.
     /// </summary>
@@ -1721,11 +1758,17 @@ namespace PlayFab.MultiplayerModels
         /// <summary>
         /// Controls whether this query should link to friends made on the Facebook network. Defaults to false
         /// </summary>
-        public bool ExcludeFacebookFriends;
+        [Obsolete("Use 'ExternalPlatformFriends' instead", true)]
+        public bool? ExcludeFacebookFriends;
         /// <summary>
         /// Controls whether this query should link to friends made on the Steam network. Defaults to false
         /// </summary>
-        public bool ExcludeSteamFriends;
+        [Obsolete("Use 'ExternalPlatformFriends' instead", true)]
+        public bool? ExcludeSteamFriends;
+        /// <summary>
+        /// Indicates which other platforms' friends this query should link to.
+        /// </summary>
+        public ExternalFriendSources? ExternalPlatformFriends;
         /// <summary>
         /// OData style string that contains one or more filters. Only the following operators are supported: "and" (logical and),
         /// "eq" (equal), "ne" (not equals), "ge" (greater than or equal), "gt" (greater than), "le" (less than or equal), and "lt"
@@ -2171,7 +2214,8 @@ namespace PlayFab.MultiplayerModels
     public class GetMatchmakingTicketResult : PlayFabResultCommon
     {
         /// <summary>
-        /// The reason why the current ticket was canceled. This field is only set if the ticket is in canceled state.
+        /// The reason why the current ticket was canceled. This field is only set if the ticket is in canceled state. Please retry
+        /// if CancellationReason is RetryRequired.
         /// </summary>
         public string CancellationReasonString;
         /// <summary>
@@ -2281,19 +2325,9 @@ namespace PlayFab.MultiplayerModels
     public class GetMultiplayerServerDetailsRequest : PlayFabRequestCommon
     {
         /// <summary>
-        /// The guid string build ID of the multiplayer server to get details for.
-        /// </summary>
-        [Obsolete("No longer available", true)]
-        public string BuildId;
-        /// <summary>
         /// The optional custom tags associated with the request (e.g. build number, external trace identifiers, etc.).
         /// </summary>
         public Dictionary<string,string> CustomTags;
-        /// <summary>
-        /// The region the multiplayer server is located in to get details for.
-        /// </summary>
-        [Obsolete("No longer available", true)]
-        public string Region;
         /// <summary>
         /// The title generated guid string session ID of the multiplayer server to get details for. This is to keep track of
         /// multiplayer server sessions.
@@ -4381,7 +4415,8 @@ namespace PlayFab.MultiplayerModels
         /// </summary>
         public string PubSubConnectionHandle;
         /// <summary>
-        /// The name of the resource to subscribe to.
+        /// The name of the resource to subscribe to. It follows the format {queueName}|{ticketId} for MatchTicketStatusChange. For
+        /// MatchInvite, ResourceId is @me.
         /// </summary>
         public string ResourceId;
         /// <summary>
@@ -4556,7 +4591,8 @@ namespace PlayFab.MultiplayerModels
         /// </summary>
         public string PubSubConnectionHandle;
         /// <summary>
-        /// The resource to unsubscribe from.
+        /// The name of the resource to unsubscribe from. It follows the format {queueName}|{ticketId} for MatchTicketStatusChange.
+        /// For MatchInvite, ResourceId is @me.
         /// </summary>
         public string ResourceId;
         /// <summary>
@@ -4801,6 +4837,24 @@ namespace PlayFab.MultiplayerModels
         /// The virtual machine ID.
         /// </summary>
         public string VmId;
+    }
+
+    [Serializable]
+    public class VmStartupScriptConfiguration : PlayFabBaseModel
+    {
+        /// <summary>
+        /// Asset which contains the VmStartupScript script and any other required files.
+        /// </summary>
+        public AssetReference VmStartupScriptAssetReference;
+    }
+
+    [Serializable]
+    public class VmStartupScriptParams : PlayFabBaseModel
+    {
+        /// <summary>
+        /// Asset which contains the VmStartupScript script and any other required files.
+        /// </summary>
+        public AssetReferenceParams VmStartupScriptAssetReference;
     }
 
     [Serializable]

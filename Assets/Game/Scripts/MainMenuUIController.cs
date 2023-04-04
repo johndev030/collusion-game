@@ -16,6 +16,7 @@ public class MainMenuUIController : MonoBehaviour
     public Text[] moneyTexts;
     public Text[] uniqueTokensTexts;
     public GameObject profileEditingPanel;
+    public Sprite[] profileImageSprites;
 
 
     public GameObject[] panels;

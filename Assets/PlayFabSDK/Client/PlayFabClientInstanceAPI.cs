@@ -413,6 +413,7 @@ namespace PlayFab
         /// <summary>
         /// Get details about all current running game servers matching the given parameters.
         /// </summary>
+        [Obsolete("Use 'MultiplayerServer/ListMultiplayerServers' instead", false)]
         public void GetCurrentGames(CurrentGamesRequest request, Action<CurrentGamesResult> resultCallback, Action<PlayFabError> errorCallback, object customData = null, Dictionary<string, string> extraHeaders = null)
         {
             var context = (request == null ? null : request.AuthenticationContext) ?? authenticationContext;
@@ -460,6 +461,7 @@ namespace PlayFab
         /// <summary>
         /// Get details about the regions hosting game servers matching the given parameters.
         /// </summary>
+        [Obsolete("Use 'MultiplayerServer/ListMultiplayerServers' instead", false)]
         public void GetGameServerRegions(GameServerRegionsRequest request, Action<GameServerRegionsResult> resultCallback, Action<PlayFabError> errorCallback, object customData = null, Dictionary<string, string> extraHeaders = null)
         {
             var context = (request == null ? null : request.AuthenticationContext) ?? authenticationContext;
@@ -1368,6 +1370,7 @@ namespace PlayFab
         /// availabe set. In that case, the information on the game session will be returned, otherwise the Status returned will be
         /// GameNotFound.
         /// </summary>
+        [Obsolete("Use 'Match/CreateMatchmakingTicket' instead", false)]
         public void Matchmake(MatchmakeRequest request, Action<MatchmakeResult> resultCallback, Action<PlayFabError> errorCallback, object customData = null, Dictionary<string, string> extraHeaders = null)
         {
             var context = (request == null ? null : request.AuthenticationContext) ?? authenticationContext;
@@ -1423,7 +1426,7 @@ namespace PlayFab
         }
 
         /// <summary>
-        /// Uses the supplied OAuth code to refresh the internally cached player PSN :tm: auth token
+        /// Uses the supplied OAuth code to refresh the internally cached player PlayStation :tm: Network auth token
         /// </summary>
         public void RefreshPSNAuthToken(RefreshPSNAuthTokenRequest request, Action<EmptyResponse> resultCallback, Action<PlayFabError> errorCallback, object customData = null, Dictionary<string, string> extraHeaders = null)
         {
@@ -1764,7 +1767,7 @@ namespace PlayFab
         }
 
         /// <summary>
-        /// Unlinks the related PSN :tm: account from the user's PlayFab account
+        /// Unlinks the related PlayStation :tm: Network account from the user's PlayFab account
         /// </summary>
         public void UnlinkPSNAccount(UnlinkPSNAccountRequest request, Action<UnlinkPSNAccountResult> resultCallback, Action<PlayFabError> errorCallback, object customData = null, Dictionary<string, string> extraHeaders = null)
         {

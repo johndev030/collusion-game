@@ -26,36 +26,76 @@ namespace Guild
 
         private void OnSharedError(PlayFab.PlayFabError error)
         {
+            if (UserAccountManager.OnGroupCreationResult != null)
+            {
+                UserAccountManager.OnGroupCreationResult.Invoke("Failed");
+            }
+            if (UserAccountManager.OnGroupJoinResult != null)
+            {
+                UserAccountManager.OnGroupJoinResult.Invoke("Failed");
+            }
+            if (UserAccountManager.OnListGroupMembersResult != null)
+            {
+                UserAccountManager.OnListGroupMembersResult.Invoke("Failed");
+            }
+            if (UserAccountManager.OnListGroupResult != null)
+            {
+                UserAccountManager.OnListGroupResult.Invoke("Failed");
+            }
+            if (UserAccountManager.OnListMembershipOpportunities != null)
+            {
+                UserAccountManager.OnListMembershipOpportunities.Invoke("Failed");
+            }
+
+            NotificationManager.Instance.CreateNotification(error.GenerateErrorReport(), NotificationType.Error);
             Debug.LogError(error.GenerateErrorReport());
+        }
+
+        public void ListGroupsMembers(EntityKey entityKey)
+        {
+            var request = new ListGroupMembersRequest { Group = entityKey };
+            PlayFabGroupsAPI.ListGroupMembers(request, OnListGroupsMembers, OnSharedError);
+        }
+
+        private void OnListGroupsMembers(ListGroupMembersResponse response)
+        {
+            UserAccountManager.Instance.ListGroupMembers = response;
+            UserAccountManager.OnListGroupMembersResult.Invoke("Success");
         }
 
         public void ListGroups(EntityKey entityKey)
         {
+            Debug.Log("entityKey " + entityKey.Id + " entityType " + entityKey.Type);
             var request = new ListMembershipRequest { Entity = entityKey };
             PlayFabGroupsAPI.ListMembership(request, OnListGroups, OnSharedError);
         }
 
+
+
         private void OnListGroups(ListMembershipResponse response)
         {
             var prevRequest = (ListMembershipRequest)response.Request;
+            UserAccountManager.Instance.AllGroups = response.Groups;
+            UserAccountManager.OnListGroupResult.Invoke("Success");
+
             foreach (var pair in response.Groups)
             {
                 GroupNameById[pair.Group.Id] = pair.GroupName;
                 EntityGroupPairs.Add(new KeyValuePair<string, string>(prevRequest.Entity.Id, pair.Group.Id));
             }
         }
-
-        public void ListMembershipOpportunities(EntityKey entityKey)
+        public void ListGroupApplications(EntityKey entityKey)
         {
-            var request = new ListMembershipOpportunitiesRequest { Entity = entityKey };
-            PlayFabGroupsAPI.ListMembershipOpportunities(request, OnListMembershipOpportunities, OnSharedError);
+            var request = new ListGroupApplicationsRequest { Group = entityKey };
+            PlayFabGroupsAPI.ListGroupApplications(request, OnListGroupApplications, OnSharedError);
         }
 
-        private void OnListMembershipOpportunities(ListMembershipOpportunitiesResponse response)
+        private void OnListGroupApplications(ListGroupApplicationsResponse response)
         {
-            if (response.Invitations != null)
+            if (response.Applications != null)
             {
-                List<GroupInvitation> invitations = response.Invitations;
+                UserAccountManager.Instance.groupApplications = response.Applications;
+                UserAccountManager.OnListMembershipOpportunities.Invoke("Success");
             }
             else
             {
@@ -63,11 +103,30 @@ namespace Guild
             }
         }
 
-        
-        public void CreateGroup(string groupName, EntityKey entityKey)
+        public void ListMembershipOpportunities(EntityKey entityKey)
+        {
+            var request = new ListMembershipOpportunitiesRequest{ Entity = entityKey };
+            PlayFabGroupsAPI.ListMembershipOpportunities(request, OnListMembershipOpportunities, OnSharedError);
+        }
+
+        private void OnListMembershipOpportunities(ListMembershipOpportunitiesResponse response)
+        {
+            if (response.Invitations != null)
+            {
+                UserAccountManager.Instance.groupInvitations = response.Invitations;
+                UserAccountManager.Instance.groupApplications = response.Applications;
+                UserAccountManager.OnListMembershipOpportunities.Invoke("Success");
+            }
+            else
+            {
+                Debug.Log("No Invitations, Bugger Off..!");
+            }
+        }
+
+        public void CreateGroup(string groupName, EntityKey entityKey = null)
         {
             // A player-controlled entity creates a new group
-            var request = new CreateGroupRequest { GroupName = groupName, Entity = entityKey };
+            var request = new CreateGroupRequest { GroupName = groupName, Entity = entityKey};
             PlayFabGroupsAPI.CreateGroup(request, OnCreateGroup, OnSharedError);
         }
         private void OnCreateGroup(CreateGroupResponse response)
@@ -77,6 +136,14 @@ namespace Guild
             var prevRequest = (CreateGroupRequest)response.Request;
             EntityGroupPairs.Add(new KeyValuePair<string, string>(prevRequest.Entity.Id, response.Group.Id));
             GroupNameById[response.Group.Id] = response.GroupName;
+
+            UserAccountManager.Instance.GroupEntity = response.Group;
+            UserAccountManager.Instance.GroupName = response.GroupName;
+            UserAccountManager.Instance.GroupID = response.Group.Id;
+            UserAccountManager.Instance.IsTeamMember = true;
+            UserAccountManager.OnGroupCreationResult.Invoke("Success");
+
+            NotificationManager.Instance.CreateNotification(response.GroupName + " Team Created", NotificationType.Normal);
         }
         public void DeleteGroup(string groupId)
         {
@@ -129,8 +196,7 @@ namespace Guild
             var prevRequest = (ApplyToGroupRequest)response.Request;
 
             // Presumably, this would be part of a separate process where the recipient reviews and accepts the request
-            var request = new AcceptGroupApplicationRequest { Group = prevRequest.Group, Entity = prevRequest.Entity };
-            PlayFabGroupsAPI.AcceptGroupApplication(request, OnAcceptApplication, OnSharedError);
+            UserAccountManager.OnGroupJoinResult.Invoke("Success");
         }
         public void OnAcceptApplication(EmptyResponse response)
         {
