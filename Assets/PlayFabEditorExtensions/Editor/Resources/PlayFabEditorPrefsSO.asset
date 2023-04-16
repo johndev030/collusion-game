@@ -20,5 +20,5 @@ MonoBehaviour:
   EdExPath: 
   LocalCloudScriptPath: /Users/apple/Documents/Projects/ClientWorkspace/Nicholas/COLLUSION/CollusionGame/Assets/PlayFabEditorExtensions/Editor/Resources/.CloudScript.js
   PanelIsShown: 0
-  curMainMenuIdx: 0
-  curSubMenuIdx: 0
+  curMainMenuIdx: 1
+  curSubMenuIdx: 2

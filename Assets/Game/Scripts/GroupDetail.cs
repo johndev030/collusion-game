@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Guild;
+using Newtonsoft.Json;
 using PlayFab;
 using PlayFab.ClientModels;
 using PlayFab.GroupsModels;
@@ -26,44 +27,79 @@ public class GroupDetail : MonoBehaviour
 
         groupCreationDate.text = groupData.Created.ToLocalTime().ToString();
 
-        ListGroupMembersRequest request = new ListGroupMembersRequest();
-        request.Group = groupData.Group;
-        PlayFabGroupsAPI.ListGroupMembers(request, respone => {
-            groupCount.text = respone.Members.Count.ToString();
-            members = respone.Members;
+  
 
-            foreach (var member in respone.Members)
+
+        PlayFabClientAPI.ExecuteCloudScript(new ExecuteCloudScriptRequest()
+        {
+            FunctionName = "listGroupMembers",
+            FunctionParameter = new { groupId = groupData.Group },
+        },
+    result =>
+    {
+        groupMembers = JsonConvert.DeserializeObject<ListGroupMembersResponse>(result.FunctionResult.ToString());
+        members = groupMembers.Members;
+        int groupMemberCount = 0;
+        foreach (var member in groupMembers.Members)
+        {
+
+            foreach (var item in member.Members)
             {
-            
-                foreach (var item in member.Members)
+
+                foreach (var item2 in item.Lineage)
                 {
-                    
-                    foreach (var item2 in item.Lineage)
+                    groupMemberCount++;
+                    if (member.RoleId == "admins" && item2.Value.Id != PlayerDashboard.defaultPlayerTitleID[1])
                     {
-                        if (member.RoleId == "admins" && item2.Value.Id != PlayerDashboard.defaultPlayerTitleID[1]) {
-                            //Debug.Log("Key "+ item2.Key);
-                            Debug.Log("Value " + item2.Value.Id);
-                            Debug.Log("Value " + item2.Value.Type);
-                            GetPlayerProfileRequest profileRequest = new GetPlayerProfileRequest();
-                            profileRequest.PlayFabId = item2.Value.Id;
-                            PlayFabClientAPI.GetPlayerProfile(profileRequest, response => {
-                                profileResult = response;
-                                groupOwner.text = response.PlayerProfile.DisplayName;
-                            }, error => { });
-                        }
+                        //Debug.Log("Key "+ item2.Key);
+                        //Debug.Log("Value " + item2.Value.Id);
+                        //Debug.Log("Value " + item2.Value.Type);
+                        GetPlayerProfileRequest profileRequest = new GetPlayerProfileRequest();
+                        profileRequest.PlayFabId = item2.Value.Id;
+                        PlayFabClientAPI.GetPlayerProfile(profileRequest, response => {
+                            profileResult = response;
+                            groupOwner.text = response.PlayerProfile.DisplayName;
+                        }, error => { });
                     }
                 }
             }
+        }
+        groupCount.text = (groupMemberCount-1).ToString();
+    },
+    error =>
+    {
+        Debug.Log("Error");
+    });
 
-            //for (int i = 0; i < members.Count; i++)
-            //{
-            //    Debug.Log("Name " + members[i].Members + " ID " + members[i].RoleId);
-            //    if(members[i].RoleId == "admins")
-            //    {
-            //        groupOwner.text = members[i].RoleId;
-            //    }
-            //}
-        }, error => { });
+        //ListGroupMembersRequest request = new ListGroupMembersRequest();
+        //request.Group = groupData.Group;
+        //PlayFabGroupsAPI.ListGroupMembers(request, respone => {
+        //    groupCount.text = respone.Members.Count.ToString();
+        //    members = respone.Members;
+
+        //    foreach (var member in respone.Members)
+        //    {
+
+        //        foreach (var item in member.Members)
+        //        {
+
+        //            foreach (var item2 in item.Lineage)
+        //            {
+        //                if (member.RoleId == "admins" && item2.Value.Id != PlayerDashboard.defaultPlayerTitleID[1]) {
+        //                    //Debug.Log("Key "+ item2.Key);
+        //                    Debug.Log("Value " + item2.Value.Id);
+        //                    Debug.Log("Value " + item2.Value.Type);
+        //                    GetPlayerProfileRequest profileRequest = new GetPlayerProfileRequest();
+        //                    profileRequest.PlayFabId = item2.Value.Id;
+        //                    PlayFabClientAPI.GetPlayerProfile(profileRequest, response => {
+        //                        profileResult = response;
+        //                        groupOwner.text = response.PlayerProfile.DisplayName;
+        //                    }, error => { });
+        //                }
+        //            }
+        //        }
+        //    }
+        //}, error => { });
     }
 
     // Update is called once per frame

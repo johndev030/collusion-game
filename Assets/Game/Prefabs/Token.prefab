@@ -30,6 +30,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1072057296963573638}
   - {fileID: 81301633332971783}
@@ -122,7 +123,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 8724535155794012040}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7342818907938126839}
+        m_TargetAssemblyTypeName: Token, Assembly-CSharp
+        m_MethodName: OpenTokenDetail
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &7342818907938126839
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -139,6 +152,10 @@ MonoBehaviour:
   countText: {fileID: 8112226960701219565}
   tokenImage: {fileID: 8724535155794012040}
   countParent: {fileID: 81301633332971783}
+  tokenOwner: []
+  activeColor: {r: 0, g: 1, b: 0, a: 1}
+  passiveColor: {r: 0.8113208, g: 0.79218584, b: 0.79218584, a: 1}
+  tokenDataPrefab: {fileID: 5729914539324669180, guid: 60d71c5dafd9549cebe735ab5f99fc03, type: 3}
 --- !u!1 &5634421178670991147
 GameObject:
   m_ObjectHideFlags: 0
@@ -167,6 +184,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 725383532522871732}
   m_Father: {fileID: 2390266591989207524}
@@ -243,6 +261,7 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2390266591989207524}
   m_RootOrder: 0
@@ -322,6 +341,7 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 81301633332971783}
   m_RootOrder: 0

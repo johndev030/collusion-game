@@ -1,29 +1,33 @@
 ﻿<Properties StartupConfiguration="{8B17B8D6-862C-6741-3D84-0F9608F90089}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Game/Scripts/GuildController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Game/Scripts/UI/UIFriend.cs">
     <Files>
-      <File FileName="Assets/Game/Scripts/GuildController.cs" Line="95" Column="47" IsPinned="True" />
-      <File FileName="Assets/Game/Scripts/UserAccountManager.cs" IsPinned="True" />
-      <File FileName="Assets/Game/Scripts/TeamMemberDetails.cs" IsPinned="True" />
-      <File FileName="Assets/ApplicantDetails.cs" IsPinned="True" />
-      <File FileName="Assets/Game/Scripts/GroupDetail.cs" Line="1" Column="1" />
-      <File FileName="Assets/Game/Scripts/TeamDetails.cs" />
-      <File FileName="Assets/Game/Scripts/PlayerDashboard.cs" />
-      <File FileName="Assets/Game/Scripts/MainMenuUIController.cs" />
-      <File FileName="Assets/Game/Scripts/ProfileEditing.cs" />
-      <File FileName="Assets/PlayFabSDK/Groups/PlayFabGroupsAPI.cs" />
-      <File FileName="Assets/Game/Scripts/Wrapper/AllGroups.cs" />
+      <File FileName="Assets/Game/Scripts/UserAccountManager.cs" Line="147" Column="3" IsPinned="True" />
+      <File FileName="Assets/Game/Scripts/TeamMemberDetails.cs" Line="64" Column="26" IsPinned="True" />
+      <File FileName="Assets/Game/Scripts/TeamDetails.cs" Line="52" Column="3" IsPinned="True" />
+      <File FileName="Assets/PlayFabSDK/Client/PlayFabClientAPI.cs" Line="2188" Column="23" IsPinned="True" />
+      <File FileName="Assets/Game/Scripts/GuildController.cs" Line="87" Column="29" IsPinned="True" />
+      <File FileName="Assets/Game/Scripts/TeamWallet.cs" />
+      <File FileName="Assets/Game/Scripts/PlayerDashboard.cs" Line="217" Column="30" />
+      <File FileName="Assets/Game/Scripts/MainMenuUIController.cs" Line="15" Column="28" />
+      <File FileName="Assets/Game/Scripts/ProfileEditing.cs" Line="116" Column="1" />
       <File FileName="Assets/Game/Scripts/Wrapper/Token.cs" />
-      <File FileName="Assets/Game/Scripts/Tokens.cs" />
-      <File FileName="Assets/Game/Scripts/WALLET.cs" />
-      <File FileName="Assets/Game/Scripts/UserAccountUI.cs" />
+      <File FileName="Assets/Game/Scripts/UserAccountUI.cs" Line="89" Column="3" />
       <File FileName="Assets/Game/Scripts/Wrapper/InventoryItem.cs" />
-      <File FileName="Assets/PlayFabEditorExtensions/Editor/PlayFabEditor.cs" />
-      <File FileName="Assets/PlayFabSDK/Client/PlayFabClientAPI.cs" />
+      <File FileName="Assets/Game/Scripts/ApplicantDetails.cs" Line="174" Column="38" />
+      <File FileName="Assets/Game/Scripts/PopUp/ProfileData.cs" Line="1" Column="1" />
+      <File FileName="Assets/PlayFabSDK/Groups/PlayFabGroupsModels.cs" Line="345" Column="29" />
+      <File FileName="Assets/Game/Scripts/Constants.cs" Line="40" Column="3" />
+      <File FileName="Assets/Game/Scripts/Photon/PhotonConnector.cs" Line="12" Column="34" />
+      <File FileName="Assets/Game/Scripts/Playfab/PlayfabFriendController.cs" Line="57" Column="74" />
+      <File FileName="Assets/Game/Scripts/Photon/PhotonChatController.cs" Line="1" Column="1" />
+      <File FileName="Assets/Game/Scripts/Photon/PhotonRoomController.cs" Line="106" Column="52" />
+      <File FileName="Assets/Game/Scripts/Photon/PhotonChatFriendController.cs" Line="46" Column="22" />
+      <File FileName="Assets/Game/Scripts/UI/UIFriend.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="7374189c-f0be-44fa-bbbe-775942a005be" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="3ab920f7-33a1-4d65-a681-7c7ee9cec039" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>

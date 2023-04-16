@@ -37,7 +37,7 @@ public class Constants
         {
             remember_me = value;
             PlayerPrefs.SetString("REMEMBER_ME", remember_me);
-            Debug.Log("remember_me" + remember_me);
+//            Debug.Log("remember_me" + remember_me);
         }
     }
 

@@ -21,7 +21,7 @@ public class MainMenuUIController : MonoBehaviour
 
     public GameObject[] panels;
     public Button[] panelButton;
-
+    public Transform popUpsParent;
 
     public static MainMenuUIController Instance;
     private void Awake()

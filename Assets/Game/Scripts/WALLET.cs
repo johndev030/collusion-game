@@ -18,7 +18,7 @@ public class WALLET : MonoBehaviour
         for (int i = 0; i < tokens.Length; i++)
         {
             tokens[i].name = (i + 1).ToString();
-            tokens[i].tokenName = (i + 1).ToString();
+            tokens[i].tokenName = (i + 1);
             tokens[i].tokenCount = 0;
             tokens[i].EnableToken();
         }

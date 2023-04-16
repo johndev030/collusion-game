@@ -22,7 +22,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>Temp\Bin\Debug\Player\</OutputPath>
-    <DefineConstants>UNITY_2021_3_21;UNITY_2021_3;UNITY_2021;UNITY_5_3_OR_NEWER;UNITY_5_4_OR_NEWER;UNITY_5_5_OR_NEWER;UNITY_5_6_OR_NEWER;UNITY_2017_1_OR_NEWER;UNITY_2017_2_OR_NEWER;UNITY_2017_3_OR_NEWER;UNITY_2017_4_OR_NEWER;UNITY_2018_1_OR_NEWER;UNITY_2018_2_OR_NEWER;UNITY_2018_3_OR_NEWER;UNITY_2018_4_OR_NEWER;UNITY_2019_1_OR_NEWER;UNITY_2019_2_OR_NEWER;UNITY_2019_3_OR_NEWER;UNITY_2019_4_OR_NEWER;UNITY_2020_1_OR_NEWER;UNITY_2020_2_OR_NEWER;UNITY_2020_3_OR_NEWER;UNITY_2021_1_OR_NEWER;UNITY_2021_2_OR_NEWER;UNITY_2021_3_OR_NEWER;UNITY_INCLUDE_TESTS;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_TEXTURE_STREAMING;ENABLE_UNET;ENABLE_UNITYEVENTS;ENABLE_VR;ENABLE_WEBCAM;ENABLE_UNITYWEBREQUEST;ENABLE_WWW;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_COLLAB;ENABLE_CLOUD_SERVICES_COLLAB_SOFTLOCKS;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_SERVICES_USE_WEBREQUEST;ENABLE_CLOUD_SERVICES_CRASH_REPORTING;ENABLE_CLOUD_SERVICES_PURCHASING;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_UNET;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_CLOUD_LICENSE;ENABLE_EDITOR_HUB_LICENSE;ENABLE_WEBSOCKET_CLIENT;ENABLE_DIRECTOR_AUDIO;ENABLE_DIRECTOR_TEXTURE;ENABLE_MANAGED_JOBS;ENABLE_MANAGED_TRANSFORM_JOBS;ENABLE_MANAGED_ANIMATION_JOBS;ENABLE_MANAGED_AUDIO_JOBS;ENABLE_ENGINE_CODE_STRIPPING;ENABLE_MANAGED_UNITYTLS;RENDER_SOFTWARE_CURSOR;ENABLE_VIDEO;ENABLE_ACCELERATOR_CLIENT_DEBUGGING;PLATFORM_WEBGL;TEXTCORE_1_0_OR_NEWER;UNITY_WEBGL;UNITY_WEBGL_API;UNITY_DISABLE_WEB_VERIFICATION;UNITY_GFX_USE_PLATFORM_VSYNC;ENABLE_CRUNCH_TEXTURE_COMPRESSION;ENABLE_SPATIALTRACKING;ENABLE_IL2CPP;NET_STANDARD_2_0;NET_STANDARD;NET_STANDARD_2_1;NETSTANDARD;NETSTANDARD2_1;ENABLE_CUSTOM_RENDER_TEXTURE;ENABLE_DIRECTOR;ENABLE_LOCALIZATION;ENABLE_SPRITES;ENABLE_TERRAIN;ENABLE_TILEMAP;ENABLE_TIMELINE;ENABLE_LEGACY_INPUT_MANAGER;TEXTCORE_FONT_ENGINE_1_5_OR_NEWER;ENABLE_PLAYFABADMIN_API;ENABLE_PLAYFABSERVER_API;CSHARP_7_OR_LATER;CSHARP_7_3_OR_NEWER</DefineConstants>
+    <DefineConstants>UNITY_2021_3_21;UNITY_2021_3;UNITY_2021;UNITY_5_3_OR_NEWER;UNITY_5_4_OR_NEWER;UNITY_5_5_OR_NEWER;UNITY_5_6_OR_NEWER;UNITY_2017_1_OR_NEWER;UNITY_2017_2_OR_NEWER;UNITY_2017_3_OR_NEWER;UNITY_2017_4_OR_NEWER;UNITY_2018_1_OR_NEWER;UNITY_2018_2_OR_NEWER;UNITY_2018_3_OR_NEWER;UNITY_2018_4_OR_NEWER;UNITY_2019_1_OR_NEWER;UNITY_2019_2_OR_NEWER;UNITY_2019_3_OR_NEWER;UNITY_2019_4_OR_NEWER;UNITY_2020_1_OR_NEWER;UNITY_2020_2_OR_NEWER;UNITY_2020_3_OR_NEWER;UNITY_2021_1_OR_NEWER;UNITY_2021_2_OR_NEWER;UNITY_2021_3_OR_NEWER;UNITY_INCLUDE_TESTS;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_TEXTURE_STREAMING;ENABLE_UNET;ENABLE_UNITYEVENTS;ENABLE_VR;ENABLE_WEBCAM;ENABLE_UNITYWEBREQUEST;ENABLE_WWW;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_COLLAB;ENABLE_CLOUD_SERVICES_COLLAB_SOFTLOCKS;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_SERVICES_USE_WEBREQUEST;ENABLE_CLOUD_SERVICES_CRASH_REPORTING;ENABLE_CLOUD_SERVICES_PURCHASING;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_UNET;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_CLOUD_LICENSE;ENABLE_EDITOR_HUB_LICENSE;ENABLE_WEBSOCKET_CLIENT;ENABLE_DIRECTOR_AUDIO;ENABLE_DIRECTOR_TEXTURE;ENABLE_MANAGED_JOBS;ENABLE_MANAGED_TRANSFORM_JOBS;ENABLE_MANAGED_ANIMATION_JOBS;ENABLE_MANAGED_AUDIO_JOBS;ENABLE_ENGINE_CODE_STRIPPING;ENABLE_MANAGED_UNITYTLS;RENDER_SOFTWARE_CURSOR;ENABLE_VIDEO;ENABLE_ACCELERATOR_CLIENT_DEBUGGING;PLATFORM_WEBGL;TEXTCORE_1_0_OR_NEWER;UNITY_WEBGL;UNITY_WEBGL_API;UNITY_DISABLE_WEB_VERIFICATION;UNITY_GFX_USE_PLATFORM_VSYNC;ENABLE_CRUNCH_TEXTURE_COMPRESSION;ENABLE_SPATIALTRACKING;ENABLE_IL2CPP;NET_STANDARD_2_0;NET_STANDARD;NET_STANDARD_2_1;NETSTANDARD;NETSTANDARD2_1;DEVELOPMENT_BUILD;ENABLE_PROFILER;DEBUG;TRACE;UNITY_ASSERTIONS;ENABLE_CUSTOM_RENDER_TEXTURE;ENABLE_DIRECTOR;ENABLE_LOCALIZATION;ENABLE_SPRITES;ENABLE_TERRAIN;ENABLE_TILEMAP;ENABLE_TIMELINE;ENABLE_LEGACY_INPUT_MANAGER;TEXTCORE_FONT_ENGINE_1_5_OR_NEWER;ENABLE_PLAYFABADMIN_API;ENABLE_PLAYFABSERVER_API;PHOTON_UNITY_NETWORKING;PUN_2_0_OR_NEWER;PUN_2_OR_NEWER;PUN_2_19_OR_NEWER;CSHARP_7_OR_LATER;CSHARP_7_3_OR_NEWER</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <NoWarn>0169</NoWarn>
@@ -56,48 +56,104 @@
     <Analyzer Include="/Applications/Visual Studio.app/Contents/Resources/lib/monodevelop/AddIns/MonoDevelop.Unity/Analyzers/Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets/Game/Scripts/Photon/PhotonFriendController.cs" />
+    <Compile Include="Assets/Photon/PhotonRealtime/Demos/DemoLoadBalancing/ConnectAndJoinRandomLb.cs" />
+    <Compile Include="Assets/Game/Scripts/Data/GameMode.cs" />
     <Compile Include="Assets/Demigiant/DOTweenPro/DOTweenProShortcuts.cs" />
+    <Compile Include="Assets/Game/Scripts/Photon/PhotonChatController.cs" />
     <Compile Include="Assets/Game/Scripts/GuildController.cs" />
     <Compile Include="Assets/Demigiant/DOTweenPro/DOTweenTextMeshPro.cs" />
+    <Compile Include="Assets/Game/Scripts/Photon/PhotonTeamController.cs" />
+    <Compile Include="Assets/Photon/PhotonLibs/WebSocket/WebSocket.cs" />
     <Compile Include="Assets/Game/Scripts/WALLET.cs" />
+    <Compile Include="Assets/Photon/PhotonChat/Demos/Common/TextButtonTransition.cs" />
+    <Compile Include="Assets/Game/Scripts/Photon/PhotonConnector.cs" />
+    <Compile Include="Assets/Photon/PhotonLibs/WebSocket/SocketWebTcp.cs" />
     <Compile Include="Assets/Game/Scripts/Wrapper/Token.cs" />
+    <Compile Include="Assets/Game/Scripts/Photon/PhotonChatFriendController.cs" />
+    <Compile Include="Assets/Game/Scripts/TokenOwner.cs" />
     <Compile Include="Assets/Game/Scripts/TeamMemberDetails.cs" />
     <Compile Include="Assets/Game/Scripts/ProfileEditing.cs" />
     <Compile Include="Assets/UnityPackages/JsonNetSample/JsonNetSample.cs" />
+    <Compile Include="Assets/Game/Scripts/Playfab/PlayfabLogin.cs" />
+    <Compile Include="Assets/Game/Scripts/UI/UIToggleButton.cs" />
+    <Compile Include="Assets/Game/Scripts/UI/UIGameMode.cs" />
+    <Compile Include="Assets/Photon/PhotonChat/Demos/DemoChat/ChatAppIdCheckerUI.cs" />
+    <Compile Include="Assets/Game/Scripts/PopUp/TokenData.cs" />
+    <Compile Include="Assets/Game/Scripts/Photon/PhotonRoomController.cs" />
+    <Compile Include="Assets/Photon/PhotonChat/Demos/DemoChat/AppSettingsExtensions.cs" />
     <Compile Include="Assets/Game/Scripts/PlayerDashboard.cs" />
+    <Compile Include="Assets/Game/Scripts/UI/UIAddFriend.cs" />
+    <Compile Include="Assets/Photon/PhotonChat/Demos/DemoChat/NamePickGui.cs" />
+    <Compile Include="Assets/Game/Scripts/ContentHeight.cs" />
     <Compile Include="Assets/Game/Scripts/Wrapper/AllGroups.cs" />
     <Compile Include="Assets/Game/Scripts/Tokens.cs" />
+    <Compile Include="Assets/Photon/PhotonChat/Demos/DemoChat/ChannelSelector.cs" />
     <Compile Include="Assets/Game/Scripts/NotificationDetails.cs" />
     <Compile Include="Assets/Game/Scripts/UserAccountManager.cs" />
     <Compile Include="Assets/Demigiant/DOTween/Modules/DOTweenModulePhysics2D.cs" />
     <Compile Include="Assets/Demigiant/DOTweenPro/DOTweenAnimation.cs" />
     <Compile Include="Assets/Demigiant/DOTweenPro/DOTweenTk2d.cs" />
-    <Compile Include="Assets/ApplicantDetails.cs" />
+    <Compile Include="Assets/Game/Scripts/UI/UIExitButton.cs" />
+    <Compile Include="Assets/Photon/PhotonChat/Demos/DemoChat/IgnoreUiRaycastWhenInactive.cs" />
+    <Compile Include="Assets/Game/Scripts/ApplicantDetails.cs" />
     <Compile Include="Assets/Game/Scripts/Constants.cs" />
+    <Compile Include="Assets/Game/Scripts/PopUp/ProfileData.cs" />
+    <Compile Include="Assets/Game/Scripts/Test.cs" />
+    <Compile Include="Assets/Photon/PhotonChat/Demos/Common/EventSystemSpawner.cs" />
+    <Compile Include="Assets/Game/Scripts/Wrapper/PlayerData.cs" />
+    <Compile Include="Assets/Game/Scripts/UI/UIInvite.cs" />
     <Compile Include="Assets/Game/Scripts/Wrapper/InventoryItem.cs" />
     <Compile Include="Assets/Game/Scripts/MainMenuUIController.cs" />
+    <Compile Include="Assets/Photon/PhotonChat/Demos/DemoChat/FriendItem.cs" />
     <Compile Include="Assets/Game/Scripts/GroupDetail.cs" />
     <Compile Include="Assets/Demigiant/DOTween/Modules/DOTweenModulePhysics.cs" />
+    <Compile Include="Assets/Game/Scripts/UI/UIDisplayTeam.cs" />
+    <Compile Include="Assets/Game/Scripts/UI/UIDisplayRoom.cs" />
     <Compile Include="Assets/Demigiant/DOTween/Modules/DOTweenModuleUnityVersion.cs" />
     <Compile Include="Assets/Demigiant/DOTween/Modules/DOTweenModuleSprite.cs" />
+    <Compile Include="Assets/Game/Scripts/UI/UIPlayerSelection.cs" />
+    <Compile Include="Assets/Game/Scripts/UI/UIFriend.cs" />
     <Compile Include="Assets/Game/Scripts/NotificationManager.cs" />
     <Compile Include="Assets/Demigiant/DOTween/Modules/DOTweenModuleUtils.cs" />
+    <Compile Include="Assets/Photon/PhotonChat/Demos/DemoChat/ChatGui.cs" />
     <Compile Include="Assets/Demigiant/DOTween/Modules/DOTweenModuleUI.cs" />
+    <Compile Include="Assets/Game/Scripts/Photon/PhotonGameController.cs" />
     <Compile Include="Assets/Game/Scripts/TeamDetails.cs" />
+    <Compile Include="Assets/Game/Scripts/UI/UIDisplayFriends.cs" />
+    <Compile Include="Assets/Photon/PhotonChat/Demos/Common/TextToggleIsOnTransition.cs" />
+    <Compile Include="Assets/Game/Scripts/UI/UITeam.cs" />
     <Compile Include="Assets/Demigiant/DOTween/Modules/DOTweenModuleAudio.cs" />
+    <Compile Include="Assets/Game/Scripts/Photon/PhotonStatus.cs" />
+    <Compile Include="Assets/Game/Scripts/UI/UIDisplayInvites.cs" />
+    <Compile Include="Assets/Photon/PhotonChat/Demos/Common/OnStartDelete.cs" />
     <Compile Include="Assets/Game/Scripts/UserAccountUI.cs" />
+    <Compile Include="Assets/Game/Scripts/Playfab/PlayfabFriendController.cs" />
+    <Compile Include="Assets/Game/Scripts/TeamWallet.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets/Photon/PhotonLibs/netstandard2.0/Photon3Unity3D.xml" />
+    <None Include="Assets/Photon/PhotonUnityNetworking/changelog.txt" />
     <None Include="Assets/Demigiant/readme_DOTweenPro.txt" />
     <None Include="Assets/Demigiant/DOTween/DOTween.XML" />
     <None Include="Assets/Demigiant/DemiLib/Core/DemiLib.dll" />
+    <None Include="Assets/Photon/PhotonLibs/WebSocket/websocket-sharp.dll" />
+    <None Include="Assets/photon-chat-readme.txt" />
     <None Include="Assets/UnityPackages/JsonNet/Newtonsoft.Json.dll" />
     <None Include="Assets/Demigiant/DOTween/DOTween.dll" />
+    <None Include="Assets/Photon/PhotonLibs/changes-library.txt" />
+    <None Include="Assets/Photon/PhotonUnityNetworking/readme.txt" />
+    <None Include="Assets/Photon/PhotonChat/Demos/DemoChat/Files/eurof_tt.txt" />
+    <None Include="Assets/Photon/PhotonLibs/netstandard2.0/Photon3Unity3D.dll" />
     <None Include="Assets/Demigiant/DOTweenPro/DOTweenPro.dll" />
+    <None Include="Assets/Photon/PhotonLibs/Photon3Unity3D.dll" />
     <None Include="Assets/Demigiant/DOTweenPro/readme.txt" />
+    <None Include="Assets/Photon/PhotonLibs/Metro/Photon3Unity3D.dll" />
     <None Include="Assets/Demigiant/DemiLib/Core/DemiLib.xml" />
     <None Include="Assets/Demigiant/DOTweenPro/DOTweenPro.XML" />
     <None Include="Assets/Demigiant/DOTween/readme.txt" />
+    <None Include="Assets/Photon/PhotonLibs/Photon3Unity3D.xml" />
+    <None Include="Assets/Photon/PhotonUnityNetworking/link.xml" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
@@ -294,6 +350,9 @@
     </Reference>
     <Reference Include="DemiLib">
       <HintPath>Assets/Demigiant/DemiLib/Core/DemiLib.dll</HintPath>
+    </Reference>
+    <Reference Include="Photon3Unity3D">
+      <HintPath>Assets/Photon/PhotonLibs/netstandard2.0/Photon3Unity3D.dll</HintPath>
     </Reference>
     <Reference Include="DOTween">
       <HintPath>Assets/Demigiant/DOTween/DOTween.dll</HintPath>
@@ -672,6 +731,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="PhotonUnityNetworking.Player.csproj">
+      <Project>{914B5068-1F61-A8C1-938D-EFC885A7F17B}</Project>
+      <Name>PhotonUnityNetworking.Player</Name>
+    </ProjectReference>
+    <ProjectReference Include="PhotonChat.Player.csproj">
+      <Project>{72897304-0603-5BDC-B845-87C90058525B}</Project>
+      <Name>PhotonChat.Player</Name>
+    </ProjectReference>
     <ProjectReference Include="Unity.Recorder.Base.Player.csproj">
       <Project>{E462FADA-2189-3F9C-02F1-B9F575B134E6}</Project>
       <Name>Unity.Recorder.Base.Player</Name>
@@ -684,17 +751,29 @@
       <Project>{C3D34CDB-8EE4-EEDE-49C1-98E18CA39777}</Project>
       <Name>Unity.Timeline.Player</Name>
     </ProjectReference>
-    <ProjectReference Include="PlayFab.Player.csproj">
-      <Project>{2678B944-ADB7-B976-C9DF-F5D8A1304295}</Project>
-      <Name>PlayFab.Player</Name>
+    <ProjectReference Include="PhotonUnityNetworking.Demos.Player.csproj">
+      <Project>{14AF9271-DB3E-17D3-7F81-0EFE8AFC064B}</Project>
+      <Name>PhotonUnityNetworking.Demos.Player</Name>
     </ProjectReference>
     <ProjectReference Include="Unity.TextMeshPro.Player.csproj">
       <Project>{69308C8B-A62C-CE06-84B2-FD6F7E141D23}</Project>
       <Name>Unity.TextMeshPro.Player</Name>
     </ProjectReference>
+    <ProjectReference Include="PlayFab.Player.csproj">
+      <Project>{2678B944-ADB7-B976-C9DF-F5D8A1304295}</Project>
+      <Name>PlayFab.Player</Name>
+    </ProjectReference>
+    <ProjectReference Include="PhotonRealtime.Player.csproj">
+      <Project>{804205E9-258A-7D08-7926-18F6339A091B}</Project>
+      <Name>PhotonRealtime.Player</Name>
+    </ProjectReference>
     <ProjectReference Include="UnityEngine.UI.Player.csproj">
       <Project>{3B03476D-D44B-BE5C-7BA4-FB6AE7516700}</Project>
       <Name>UnityEngine.UI.Player</Name>
+    </ProjectReference>
+    <ProjectReference Include="PhotonUnityNetworking.Utilities.Player.csproj">
+      <Project>{A1650CAB-3FAA-47A0-1757-1EE164501351}</Project>
+      <Name>PhotonUnityNetworking.Utilities.Player</Name>
     </ProjectReference>
     <ProjectReference Include="Unity.Recorder.Player.csproj">
       <Project>{E1AA489A-F7BD-C567-48DC-45B8D42CB17D}</Project>

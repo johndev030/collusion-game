@@ -68,7 +68,7 @@ public class UserAccountUI : MonoBehaviour
             //print("asyncLoad.progress" + asyncLoad.progress);
 
             // Check if the load has finished
-            if (asyncLoad.progress >= 0.9f && setProfilePhoto && setupMoney && fetchTokensData)
+            if (asyncLoad.progress >= 0.9f && setupMoney && fetchTokensData)
             {
                 loadingBar.fillAmount = 1;
                 //Change the Text to show the Scene is ready
@@ -86,11 +86,11 @@ public class UserAccountUI : MonoBehaviour
     public void RememberMe()
     {
         Constants.REMEMBER_ME = toggle.isOn.ToString();
-        print("toggle " + toggle.isOn.ToString());
+//        print("toggle " + toggle.isOn.ToString());
     }
     void GoToMainMenu(string message)
     {
-        GetUserData();
+        //GetUserData();
         GetVirtualCurrency();
         GetTokenInventory();
         StartCoroutine(LoadMainMenu());
@@ -140,9 +140,9 @@ public class UserAccountUI : MonoBehaviour
     public void Login()
     {
         loadingScreen.SetActive(true);
-        Debug.Log("userName_login " + userName_login);
+        //Debug.Log("userName_login " + userName_login);
 
-        Debug.Log("password " + password_login);
+        //Debug.Log("password " + password_login);
 
         UserAccountManager.Instance.Login(userName_login, password_login);
     }
@@ -150,17 +150,26 @@ public class UserAccountUI : MonoBehaviour
 
     #region Default Values
     bool setProfilePhoto = false;
+    /*
     public void SetTitleData()
     {
-        PlayFabClientAPI.UpdateUserData(new UpdateUserDataRequest()
-        {
-            Data = new Dictionary<string, string>() {
-            { "ProfilePhoto", "0" },
-                { "isTeamMember", "false"},
-                { "GroupID", "000000000"},
+        UpdateUserDataRequest updateUserDataRequest = new UpdateUserDataRequest {
 
-        }
-        },
+            Data = new Dictionary<string, string> {
+                { "ProfilePhoto", "0" },
+                { "isTeamMember", "false" },
+                { "GroupID", "0000000000" }
+            },
+            Permission = UserDataPermission.Public
+        };
+
+      
+        //updateUserDataRequest.Data["ProfilePhoto"] = "0";
+        //updateUserDataRequest.Data["isTeamMember"] = "false";
+        //updateUserDataRequest.Data["GroupID"] = "0000000000";
+        //updateUserDataRequest.Permission = UserDataPermission.Public;
+
+        PlayFabClientAPI.UpdateUserData(updateUserDataRequest,
         result =>
         {
             Debug.Log("Successfully updated user data");
@@ -178,8 +187,8 @@ public class UserAccountUI : MonoBehaviour
     {
         PlayFabClientAPI.GetUserData(new GetUserDataRequest()
         {
-            PlayFabId = UserAccountManager.Instance.PlayFabID, 
-            Keys = null
+            PlayFabId = UserAccountManager.Instance.PlayFabID
+            
         }, result =>
         {
             if (result.Data == null || !result.Data.ContainsKey("ProfilePhoto") || !result.Data.ContainsKey("isTeamMember") || !result.Data.ContainsKey("GroupID"))
@@ -198,6 +207,7 @@ public class UserAccountUI : MonoBehaviour
             Debug.Log(error.GenerateErrorReport());
         });
     }
+    */
     int collusionMoney;
     bool setupMoney = false;
 

@@ -11,6 +11,8 @@ using PlayFab.Json;
 using UnityEngine;
 using UnityEngine.UI;
 using Newtonsoft.Json;
+using DG.Tweening;
+
 public class PlayerDashboard : MonoBehaviour
 {
     public Text uniqueTokenCount; public Text[] moneyTexts;
@@ -23,23 +25,27 @@ public class PlayerDashboard : MonoBehaviour
     /// title_player_account and master_player_account
     /// </summary>
     public static string[] defaultPlayerTitleID = { "1CEF8B074D4740BC", "655DC02EC6E815DE" };
-    string[] defaultPlayer= { "1CEF8B074D4740BC" };
-
+    string[] defaultPlayer = { "1CEF8B074D4740BC" };
+    public static PlayerDashboard Instance;
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+    }
 
     void Start()
     {
         guildController = new GuildController();
 
-        for (int i = 0; i < moneyTexts.Length; i++)
-        {
-            moneyTexts[i].text = "$" + UserAccountManager.Instance.MONEY.ToString();
-        }
+        //SetPlayerData();
         UpdatePlayerTitleData();
-        UpdateTokensCount();
         UpdateTitleData();
     }
+    
 
-    void UpdateTokensCount()
+    void UpdatePlayerPersonalTokensCount()
     {
         PlayFabClientAPI.GetUserInventory(new GetUserInventoryRequest()
         , result =>
@@ -55,6 +61,11 @@ public class PlayerDashboard : MonoBehaviour
         {
             Debug.Log("Error Getting Tokens");
         });
+
+        for (int i = 0; i < moneyTexts.Length; i++)
+        {
+            moneyTexts[i].text = "$" + UserAccountManager.Instance.MONEY.ToString();
+        }
     }
     string timeSinceGameStart_server, tradeCompleted_server, dollarVolume_server, collusionExecuted_server, averageTeamSize_server;
 
@@ -122,48 +133,26 @@ public class PlayerDashboard : MonoBehaviour
 
     void UpdatePlayerTitleData()
     {
-        PlayFabClientAPI.GetUserData(new GetUserDataRequest()
-        {
-            PlayFabId = UserAccountManager.Instance.PlayFabID
-        }, response =>
-        {
-            UserAccountManager.Instance.IsTeamMember = bool.Parse(response.Data["isTeamMember"].Value);
-            UserAccountManager.Instance.GroupID = response.Data["GroupID"].Value;
-            UserAccountManager.Instance.GroupEntity.Id = response.Data["GroupID"].Value;
+            UserAccountManager.Instance.GroupID = UserAccountManager.Instance.playerData.GroupID;
+            UserAccountManager.Instance.GroupEntity.Id = UserAccountManager.Instance.playerData.GroupID;
             UserAccountManager.Instance.GroupEntity.Type = "group";
+            
+            UserAccountManager.Instance.ProfilePhotoIndex = UserAccountManager.Instance.playerData.ProfilePhoto;
 
-            UserAccountManager.Instance.ProfilePhotoIndex = int.Parse(response.Data["ProfilePhoto"].Value);
-            if (UserAccountManager.Instance.IsTeamMember)
+            if (UserAccountManager.Instance.playerData.isTeamMember)
             {
-                makeTeamButton.gameObject.SetActive(false);
-                seeAllTeams.gameObject.SetActive(true);
-                leaveTeam.gameObject.SetActive(true);
+                createOrJoinButtons.gameObject.SetActive(false);
                 GetGroupDetail();
             }
-        }, error => { Debug.Log("Player User Data not found"); });
+            else
+            {
+                UpdatePlayerPersonalTokensCount();
+
+                createOrJoinButtons.gameObject.SetActive(true);
+            }
+        //}, error => { Debug.Log("Player User Data not found"); });
     }
 
-    public Root teamMemberInventoryDetails;
-    /// <summary>
-    /// Get all the inventory data of team member to merge wallets
-    /// </summary>
-    void GetTeamMemberInventory()
-    {
-        PlayFabClientAPI.ExecuteCloudScript(new ExecuteCloudScriptRequest()
-        {
-            FunctionName = "GetInventory",
-            FunctionParameter = new { ID = UserAccountManager.Instance.PlayFabID },
-        },
-    result =>
-    {
-        teamMemberInventoryDetails = JsonUtility.FromJson<Root>(result.FunctionResult.ToString());
-
-    },
-    error =>
-    {
-        Debug.Log("Error");
-    });
-    }
 
     public void OpenPanel(int index)
     {
@@ -182,7 +171,7 @@ public class PlayerDashboard : MonoBehaviour
 
     [Space(5)]
     [Header("Team")]
-    public Button makeTeamButton;
+    public Button createTeam;
     public Image makeTeamButtonLoading;
     private string teamName;
     public GroupDetail groupDetailPrefab;
@@ -192,13 +181,15 @@ public class PlayerDashboard : MonoBehaviour
     public TeamMemberDetails teamMemberPrefab;
     public TeamMemberDetails[] team;
     public Transform teamDetailParent;
-    public Button seeAllTeams, leaveTeam;
+    public Transform createOrJoinButtons;
+    public Button refreshButton;
+    public TeamDetails teamDetails;
 
     public void MakeTeam()
     {
         if (teamName != "")
         {
-            makeTeamButton.interactable = false;
+            createTeam.interactable = false;
             makeTeamButtonLoading.gameObject.SetActive(true);
             UserAccountManager.OnGroupCreationResult.AddListener(OnGroupCreatedResult);
             PlayFab.ClientModels.EntityKey entity = UserAccountManager.Instance.EntityToken.Entity;
@@ -212,6 +203,8 @@ public class PlayerDashboard : MonoBehaviour
     }
     public void GetGroupDetail()
     {
+
+        teamDetails.TeamTotalCash = 0;
         UserAccountManager.OnListGroupMembersResult.AddListener(OnListGroupMembers);
         guildController.ListGroupsMembers(GuildController.EntityKeyMaker(UserAccountManager.Instance.GroupID));
     }
@@ -221,33 +214,34 @@ public class PlayerDashboard : MonoBehaviour
         if (result == "Success")
         {
             entities = (UserAccountManager.Instance.ListGroupMembers.Members);
+            teamDetails.GetGroupDetails();
 
-            for (int i = 0; i < entities.Count; i++)
-            {
-                for (int j = 0; j < entities[i].Members.Count; j++)
-                {
-                    //Debug.Log("ID: " + entities[i].Members[j].Key.Id + " Type: " + entities[i].Members[j].Key.Type);
-                    PlayFab.AdminModels.GetPlayerProfileRequest request = new PlayFab.AdminModels.GetPlayerProfileRequest();
-                    request.PlayFabId = entities[i].Members[j].Key.Id;
+            //for (int i = 0; i < entities.Count; i++)
+            //{
+            //    for (int j = 0; j < entities[i].Members.Count; j++)
+            //    {
+            //        //Debug.Log("ID: " + entities[i].Members[j].Key.Id + " Type: " + entities[i].Members[j].Key.Type);
+            //        PlayFab.AdminModels.GetPlayerProfileRequest request = new PlayFab.AdminModels.GetPlayerProfileRequest();
+            //        request.PlayFabId = entities[i].Members[j].Key.Id;
 
 
-                    PlayFab.ProfilesModels.GetEntityProfileRequest req = new PlayFab.ProfilesModels.GetEntityProfileRequest();
-                    req.Entity = new PlayFab.ProfilesModels.EntityKey { Id = entities[i].Members[j].Key.Id, Type = "title_player_account" };
-                    req.DataAsObject = true;
-                    PlayFabProfilesAPI.GetProfile(req, response =>
-                    {
-                        if (response.Profile.Entity.Id != PlayerDashboard.defaultPlayerTitleID[0])
-                        {
-                            TeamMemberDetails teamMember = Instantiate(teamMemberPrefab, teamDetailParent);
-                            teamMember.SetData(response);
-                        }
-                    }, error =>
-                    {
-                        Debug.Log("Error " + error.Error);
-                    }
-                    );
-                }
-            }
+            //        PlayFab.ProfilesModels.GetEntityProfileRequest req = new PlayFab.ProfilesModels.GetEntityProfileRequest();
+            //        req.Entity = new PlayFab.ProfilesModels.EntityKey { Id = entities[i].Members[j].Key.Id, Type = "title_player_account" };
+            //        req.DataAsObject = true;
+            //        PlayFabProfilesAPI.GetProfile(req, response =>
+            //        {
+            //            if (response.Profile.Entity.Id != PlayerDashboard.defaultPlayerTitleID[0])
+            //            {
+            //                TeamMemberDetails teamMember = Instantiate(teamMemberPrefab, teamDetailParent);
+            //                teamMember.SetData(response);
+            //            }
+            //        }, error =>
+            //        {
+            //            Debug.Log("Error " + error.Error);
+            //        }
+            //        );
+            //    }
+            //}
         }
         else if (result == "Failed")
         {
@@ -264,10 +258,10 @@ public class PlayerDashboard : MonoBehaviour
             PlayFabClientAPI.UpdateUserData(new UpdateUserDataRequest()
             {
                 Data = new Dictionary<string, string>()
-            {
-                { "isTeamMember", "true" },
-                { "GroupID", UserAccountManager.Instance.GroupEntity.Id },
-            }
+                {
+                    { "isTeamMember", "true" },
+                    { "GroupID", UserAccountManager.Instance.GroupEntity.Id },
+                }
             },
                 result =>
                 {
@@ -279,27 +273,23 @@ public class PlayerDashboard : MonoBehaviour
                         FunctionParameter = new { GroupId = UserAccountManager.Instance.GroupEntity.Id, MemberIDs = defaultPlayer },
                         GeneratePlayStreamEvent = true
                     },
-            response =>
-            {
-                for (int i = 0; i < response.Logs.Count; i++)
-                {
-                    Debug.Log(response.Logs[i].Message);
-                }
-
-                //                Debug.Log("result " + response.FunctionResult.ToString());
-                if (response.FunctionResult.ToString() == "True")
-                {
-                    Debug.Log("DefaultPlayerAdded");
-                }
-                else
-                {
-                    Debug.Log("DefaultPlayer not Added ");
-                }
-            },
-            error =>
-            {
-                Debug.Log("Error: " + error.Error + " DefaultPlayer not Added");
-            }); ;
+                    response =>
+                        {
+                            if (response.FunctionResult.ToString() == "True")
+                            {
+                                Debug.Log("DefaultPlayerAdded");
+                            }
+                            else
+                            {
+                                Debug.Log("DefaultPlayer not Added ");
+                            }
+                        },
+                    error =>
+                        {
+                            Debug.Log("Error: " + error.Error + " DefaultPlayer not Added");
+                        });
+                    createOrJoinButtons.gameObject.SetActive(false);
+                    ClosePanel(1);
                 },
                 error =>
                 {
@@ -312,16 +302,17 @@ public class PlayerDashboard : MonoBehaviour
         {
             NotificationManager.Instance.CreateNotification("Team can't be created, Try Again", NotificationType.Normal);
         }
-        makeTeamButton.interactable = true;
+        createTeam.interactable = true;
         makeTeamButtonLoading.gameObject.SetActive(false);
 
         GetGroupDetail();
-
         UserAccountManager.OnGroupCreationResult.RemoveListener(OnGroupCreatedResult);
     }
     public void OpenJoinGroup()
     {
         ListAllGroups();
+
+
     }
 
     public void ListAllGroups()
@@ -337,7 +328,7 @@ public class PlayerDashboard : MonoBehaviour
         //Debug.Log(result.FunctionResult.ToString());
         string s = result.FunctionResult.ToString();
         string substring = s.Substring(10);
-//        Debug.Log(substring);
+        //        Debug.Log(substring);
         substring = substring.Substring(0, substring.Length - 1);
         //Debug.Log(substring);
 
@@ -364,26 +355,36 @@ public class PlayerDashboard : MonoBehaviour
     {
         if (result == "Success")
         {
-            GetGroupRequest getGroupRequest = new GetGroupRequest();
             AllGroupDetails = new List<GroupDetail>();
             for (int i = 0; i < UserAccountManager.Instance.AllGroups.Count; i++)
             {
-                GroupDetail group = Instantiate(groupDetailPrefab, groupDetailParent);
-                AllGroupDetails.Add(group);
-                getGroupRequest.Group = UserAccountManager.Instance.AllGroups[i].Group;
-                PlayFabGroupsAPI.GetGroup(getGroupRequest, respose =>
+
+                PlayFabClientAPI.ExecuteCloudScript(new ExecuteCloudScriptRequest()
                 {
-                    group.groupData = respose;
-                    group.SetData();
-                }, error =>
-                {
-                    Debug.Log("Error :" + error.Error);
-                });
-                //ListGroupMembersRequest request=  new ListGroupMembersRequest();
-                //request.Group = UserAccountManager.Instance.AllGroups[i].Group;
-                //PlayFabGroupsAPI.ListGroupMembers(request, respose =>
+                    FunctionName = "getGroup",
+                    FunctionParameter = new { groupId = UserAccountManager.Instance.AllGroups[i].Group },
+                },
+    result =>
+    {
+        GroupDetail group = Instantiate(groupDetailPrefab, groupDetailParent);
+        AllGroupDetails.Add(group);
+        //        Debug.Log(result.FunctionResult.ToString());
+
+        group.groupData = JsonConvert.DeserializeObject<GetGroupResponse>(result.FunctionResult.ToString());
+        group.SetData();
+    },
+    error =>
+    {
+        Debug.Log("Error");
+    });
+
+                //GetGroupRequest getGroupRequest = new GetGroupRequest();
+                //getGroupRequest.Group = UserAccountManager.Instance.AllGroups[i].Group;
+                //PlayFabGroupsAPI.GetGroup(getGroupRequest, respose =>
                 //{
-                //    group.groupMembers = respose;
+                //    GroupDetail group = Instantiate(groupDetailPrefab, groupDetailParent);
+                //    AllGroupDetails.Add(group);
+                //    group.groupData = respose;
                 //    group.SetData();
                 //}, error =>
                 //{
